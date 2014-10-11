@@ -1,7 +1,9 @@
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/maps_pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.itii.biomarket.MapsActivity" />
-
+    android:id="@+id/map"
+    tools:context=".MapsActivity"
+    android:clickable="true"
+  	android:apiKey="AIzaSyDEzcqKHEJO2VkqtdOLKewmF693BEAYNvo"
+    class="com.google.android.gms.maps.SupportMapFragment"/>

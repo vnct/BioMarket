@@ -1,15 +1,11 @@
 package com.itii.biomarket;
 
-
-import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.ActionBar;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 
@@ -88,14 +84,10 @@ public class MainActivity extends Activity implements
 		case 2:
 			
 		    i = new Intent(getApplicationContext(), MapsActivity.class);
-		    i.putExtra("maps", true);
-		    i.putExtra("list", false);
 	        startActivity(i);
 			break;
 		case 3:
-			i = new Intent(getApplicationContext(), MapsActivity.class);
-			i.putExtra("maps", false);
-		    i.putExtra("list", true);
+			i = new Intent(getApplicationContext(), ListStoreActivity.class);;
 	        startActivity(i);
 			break;
 		case 4:
@@ -103,6 +95,8 @@ public class MainActivity extends Activity implements
 			break;
 		case 5:
 			mTitle = getString(R.string.title_settings);
+			i = new Intent(getApplicationContext(), SettingsActivity.class);
+	        startActivity(i);
 			break;
 		}
 	}
