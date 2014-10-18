@@ -2,6 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.itii.biomarket.MapsActivity" >
 
+      <item
+        android:id="@+id/menu_basket_location"
+        android:icon="@drawable/ic_action_collections_sort_by_size"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/basket_location"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
