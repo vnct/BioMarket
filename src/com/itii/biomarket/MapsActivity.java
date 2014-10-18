@@ -2,6 +2,7 @@ package com.itii.biomarket;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.Menu;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -24,6 +25,12 @@ public class MapsActivity extends FragmentActivity {
         super.onResume();
         setUpMapIfNeeded();
     }
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.maps, menu);
+		return true;
+	}
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
