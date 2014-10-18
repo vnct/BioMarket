@@ -1,14 +1,17 @@
 package com.itii.biomarket;
 
-import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks, ViewPager.OnPageChangeListener {
@@ -58,11 +61,15 @@ public class MainActivity extends Activity implements
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.main_pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+
 		mViewPager.setOnPageChangeListener(this);
 		
 		Log.println(Log.INFO, "MainActivity", "onCreate");
 
 		
+
+				
+
 	}
 
 	@Override

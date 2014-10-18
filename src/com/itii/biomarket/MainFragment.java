@@ -1,11 +1,16 @@
 package com.itii.biomarket;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.MultiAutoCompleteTextView;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -32,15 +37,36 @@ public class MainFragment extends Fragment {
 		fragment.setArguments(args);
 		return fragment;
 	}
-
-	public MainFragment() {
-	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_main, container,
 				false);
+		
+		//GridLayout gl = (GridLayout) rootView.findViewById(R.id.GridLayout1);
+		AutoCompleteTextView autoComplete = (AutoCompleteTextView)rootView.findViewById(R.id.autoCompleteTextView1);
+
+		
+		String[] autoCompletString = getResources().getStringArray(R.array.autoCompletion);
+		
+//		String autoCompletString[]={"Arun","Mathev","Vishnu","Vishal","Arjun",
+//        		"Arul","Balaji","Babu","Boopathy","Godwin","Nagaraj"};
+ 
+		ArrayAdapter<String> adp=new ArrayAdapter<String>(this.getActivity(),
+        		android.R.layout.simple_dropdown_item_1line,autoCompletString);
+ 
+		autoComplete.setAdapter(adp);
+		 
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return rootView;
 	}
 
