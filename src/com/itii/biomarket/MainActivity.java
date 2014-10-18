@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 
 public class MainActivity extends Activity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks {
+		NavigationDrawerFragment.NavigationDrawerCallbacks, ViewPager.OnPageChangeListener {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -42,11 +43,11 @@ public class MainActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 	
-	
-
+		mTitle = getTitle();
+		
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
-		mTitle = getTitle();
+		
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
@@ -57,14 +58,16 @@ public class MainActivity extends Activity implements
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.main_pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		mViewPager.setOnPageChangeListener(this);
 		
-		
+		Log.println(Log.INFO, "MainActivity", "onCreate");
+
 		
 	}
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
-		System.out.println("My position" + position);
+		System.out.println("My position " + position);
 		onSectionAttached(position+1);
 		// update the main content by replacing fragments
 		/*FragmentManager fragmentManager = getFragmentManager();
@@ -75,11 +78,21 @@ public class MainActivity extends Activity implements
 	}
 
 	public void onSectionAttached(int number) {
+		Log.println(Log.INFO, "MainActivity", "onSectionAttached");
 		Intent i;
-		System.out.println("Clic sur " + number);
 		switch (number) {
 		case 1:
+
+			try{
+				mViewPager.setCurrentItem(0);
+				Log.println(Log.INFO, "MainActivity", "onSectionAttached - case 1");
+			}
+			catch(Exception e)
+			{
+				Log.println(Log.ERROR, "MainActivity", "onSectionAttached - case 1");
+			}
 			mTitle = getString(R.string.title_home);
+			
 			break;
 		case 2:
 			
@@ -92,6 +105,7 @@ public class MainActivity extends Activity implements
 			break;
 		case 4:
 			mTitle = getString(R.string.title_basket);
+			mViewPager.setCurrentItem(1);
 			break;
 		case 5:
 			mTitle = getString(R.string.title_settings);
@@ -131,6 +145,27 @@ public class MainActivity extends Activity implements
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		mViewPager = (ViewPager) findViewById(R.id.main_pager);
+		mTitle = mViewPager.getAdapter().getPageTitle(arg0);
+		Log.println(Log.INFO, "MainActivity", "onPageSelected " + mTitle);
+		
+		
 	}
 
 	
