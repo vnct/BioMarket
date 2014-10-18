@@ -1,5 +1,7 @@
 package com.itii.biomarket;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.MultiAutoCompleteTextView;
+
+import com.itii.biomarket.model.Article;
+import com.itii.biomarket.model.StoreManagement;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -26,10 +28,7 @@ public class MainFragment extends Fragment {
 	 * fragment.
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
-
-	/**
-	 * Returns a new instance of this fragment for the given section number.
-	 */
+	
 	public static  MainFragment newInstance(int sectionNumber) {
 		MainFragment fragment = new MainFragment();
 		Bundle args = new Bundle();
@@ -48,24 +47,35 @@ public class MainFragment extends Fragment {
 		AutoCompleteTextView autoComplete = (AutoCompleteTextView)rootView.findViewById(R.id.autoCompleteTextView1);
 
 		
-		String[] autoCompletString = getResources().getStringArray(R.array.autoCompletion);
+//		String[] autoCompletString = getResources().getStringArray(R.array.autoCompletion);
 		
 //		String autoCompletString[]={"Arun","Mathev","Vishnu","Vishal","Arjun",
 //        		"Arul","Balaji","Babu","Boopathy","Godwin","Nagaraj"};
  
+		
+		
+		
+		StoreManagement DAOS = new StoreManagement(this.getActivity());
+        DAOS.open();
+
+        List<Article> ArticleGet = DAOS.getArticles();
+        
+        String[] autoCompletString = new String[ArticleGet.size()];
+        
+        if(ArticleGet != null) {
+        	int i = 0;
+        	
+			for(Article m : ArticleGet)
+			{
+				autoCompletString[i] = m.getNom();
+				i++;
+			}
+        }
+
 		ArrayAdapter<String> adp=new ArrayAdapter<String>(this.getActivity(),
         		android.R.layout.simple_dropdown_item_1line,autoCompletString);
  
 		autoComplete.setAdapter(adp);
-		 
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		return rootView;
 	}
