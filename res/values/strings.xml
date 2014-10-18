@@ -20,6 +20,12 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="title_activity_list_store">ListStoreActivity</string>
+
+    <string name="basket_delete">Delete</string>
+    <string name="basket_new">Add</string>
+    <string name="basket_location">Shopping</string>
+
+
     <string name="multiautocompletetextview">MultiAutoCompleteTextView</string>
     <string name="entrez_un_produit">Entrez un produit</string>
     <string name="ajouter_au_panier">Ajouter au panier</string>

@@ -1,11 +1,20 @@
 package com.itii.biomarket;
 
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.net.Uri;
+import android.os.Bundle;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -23,6 +32,7 @@ public class BasketFragment extends Fragment {
 		 */
 		private static final String ARG_SECTION_NUMBER = "section_number";
 
+		
 		/**
 		 * Returns a new instance of this fragment for the given section number.
 		 */
@@ -42,6 +52,16 @@ public class BasketFragment extends Fragment {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_basket,
 					container, false);
+			
+			
+			 List<String> toto = new ArrayList<String>();
+		        toto.add("basket 1");
+		        toto.add("basket 2");
+		        toto.add("basket 3");
+		        //listViewstore = (ListView)findViewById(R.id.listViewStore);
+		        ListView listViewbasket = (ListView)rootView.findViewById(R.id.listViewbasket);
+		        listViewbasket.setAdapter(new BasketBaseAdapter(getActivity(),toto));
+			
 			return rootView;
 		}
 	
