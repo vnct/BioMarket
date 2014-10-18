@@ -2,16 +2,10 @@ package com.itii.biomarket;
 
 import java.util.Locale;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -23,14 +17,13 @@ import android.view.ViewGroup;
  */
 public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 	
-	Context mContext;
+	private Context mContext;
+	
 	public MainSectionsPagerAdapter(FragmentManager fm,Context context) {
 		super(fm);
 		 mContext = context;
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	@Override
 	public Fragment getItem(int position) {
