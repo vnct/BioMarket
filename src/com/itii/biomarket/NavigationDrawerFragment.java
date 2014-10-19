@@ -55,7 +55,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private ListView mDrawerListView;
 	private View mFragmentContainerView;
 
-	private int mCurrentSelectedPosition = 0;
+//	private int mCurrentSelectedPosition = 0;
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;
 
@@ -74,13 +74,12 @@ public class NavigationDrawerFragment extends Fragment {
 		mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
 		if (savedInstanceState != null) {
-			mCurrentSelectedPosition = savedInstanceState
-					.getInt(STATE_SELECTED_POSITION);
+			//mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
 			mFromSavedInstanceState = true;
 		}
 
 		// Select either the default item (0) or the last selected item.
-		selectItem(mCurrentSelectedPosition);
+		//selectItem(mCurrentSelectedPosition);
 	}
 
 	@Override
@@ -113,7 +112,7 @@ public class NavigationDrawerFragment extends Fragment {
 						getString(R.string.title_list),
 						getString(R.string.title_basket),
 						getString(R.string.title_settings),}));
-		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+		//mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;
 	}
 
@@ -212,9 +211,9 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	private void selectItem(int position) {
-		mCurrentSelectedPosition = position;
+		//mCurrentSelectedPosition = position;
 		if (mDrawerListView != null) {
-			mDrawerListView.setItemChecked(position, true);
+			//mDrawerListView.setItemChecked(position, true);
 		}
 		if (mDrawerLayout != null) {
 			mDrawerLayout.closeDrawer(mFragmentContainerView);
@@ -244,7 +243,7 @@ public class NavigationDrawerFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
+		//outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
 	}
 
 	@Override
@@ -273,6 +272,7 @@ public class NavigationDrawerFragment extends Fragment {
 			return true;
 		}
 
+		
 	
 
 		return super.onOptionsItemSelected(item);

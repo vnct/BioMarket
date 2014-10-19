@@ -1,5 +1,7 @@
 package com.itii.biomarket;
 
+import com.google.android.gms.internal.ki;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -40,13 +42,14 @@ public class MainActivity extends Activity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
+	private int itemCurrent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-	
-		mTitle = getTitle();
+		
+		 mTitle = getTitle();
 		
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
@@ -64,6 +67,9 @@ public class MainActivity extends Activity implements
 
 		mViewPager.setOnPageChangeListener(this);
 		
+		
+		 
+		
 		Log.println(Log.INFO, "MainActivity", "onCreate");
 
 		
@@ -71,6 +77,37 @@ public class MainActivity extends Activity implements
 				
 
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		try
+		{
+			Log.println(Log.WARN, "Maint Acitivty - onActivityResult", data.getStringExtra("RESULT"));
+			mViewPager.setCurrentItem(Integer.parseInt(data.getStringExtra("RESULT")));
+		}
+		catch(Exception e)
+		{
+			
+		}
+	//	
+		
+	};
+	@Override
+	protected void onResume() {
+		super.onResume();
+		try{
+//			itemCurrent = getIntent().getExtras().getInt("ITEM");
+//			Log.println(Log.WARN, "Maint Acitivty - onResume", itemCurrent+"");
+//			mViewPager.setCurrentItem(itemCurrent);
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
+		
+	};
+	
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
@@ -85,7 +122,8 @@ public class MainActivity extends Activity implements
 	}
 
 	public void onSectionAttached(int number) {
-		Log.println(Log.INFO, "MainActivity", "onSectionAttached");
+		Log.println(Log.INFO, "MainActivity", "onSectionAttached " + number);
+		String parentname="Home";
 		Intent i;
 		switch (number) {
 		case 1:
@@ -104,18 +142,22 @@ public class MainActivity extends Activity implements
 		case 2:
 			
 		    i = new Intent(getApplicationContext(), MapsActivity.class);
-	        startActivity(i);
+		    i.putExtra("PARENTNAME",parentname);
+	        startActivityForResult(i, 1);
+	    
+	        
 			break;
 		case 3:
 			i = new Intent(getApplicationContext(), ListStoreActivity.class);;
-	        startActivity(i);
+			i.putExtra("PARENTNAME",parentname);
+	        startActivityForResult(i, 1);
 			break;
 		case 4:
 			mTitle = getString(R.string.title_basket);
 			mViewPager.setCurrentItem(1);
 			break;
 		case 5:
-			mTitle = getString(R.string.title_settings);
+			//mTitle = getString(R.string.title_settings);
 			i = new Intent(getApplicationContext(), SettingsActivity.class);
 	        startActivity(i);
 			break;

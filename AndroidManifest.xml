@@ -53,11 +53,11 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName=".MainActivity" >
+       android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.itii.biomarket.MainActivity" />
-        </activity>
+          </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -68,16 +68,13 @@
 
         <activity
             android:name=".ListStoreActivity"
-            android:label="@string/title_activity_list_store"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.itii.biomarket.MainActivity" />
+            android:label="@string/title_activity_list_store">
+        
         </activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity" >
+              android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.itii.biomarket.MainActivity" />

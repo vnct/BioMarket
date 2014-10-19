@@ -5,24 +5,42 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ListView;
 
 
 
-public class ListStoreActivity extends Activity {
+public class ListStoreActivity extends Activity  implements
+NavigationDrawerFragment.NavigationDrawerCallbacks{
 
 	
+	private NavigationDrawerFragment mNavigationDrawerFragment;
+	private String parentName;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_store);
+		try
+		{
+		parentName = getIntent().getExtras().getString("PARENTNAME");
+		}
+		catch(Exception e)
+		{
+			
+		}
+		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
+				.findFragmentById(R.id.navigation_drawer);
+		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
+				(DrawerLayout) findViewById(R.id.drawer_layout));
 		
 		
 		if (savedInstanceState == null) {
@@ -51,5 +69,68 @@ public class ListStoreActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+
+	@Override
+	public void onNavigationDrawerItemSelected(int position) {
+		onSectionAttached(position+1);
+		
+	}
+
+private void onSectionAttached(int number) {
+		
+		Log.println(Log.INFO, "MainActivity", "onSectionAttached");
+		Intent i;
+		switch (number) {
+		case 1:
+
+			if(parentName.equals("Home"))
+			{
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra("RESULT","0");
+				setResult(RESULT_OK, returnIntent);
+				finish();
+			}
+			else
+			{
+				i = new Intent(getApplicationContext(), MainActivity.class);
+				i.putExtra("ITEM", 0);
+				startActivity(i);
+				finish();
+			}
+			break;
+		case 2:
+			i = new Intent(getApplicationContext(), MapsActivity.class);
+	        startActivity(i);
+	        finish();
+		  
+			break;
+		case 3:
+			
+			break;
+		case 4:
+			if(parentName.equals("Home"))
+			{
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra("RESULT","1");
+				setResult(RESULT_OK, returnIntent);
+				
+				finish();
+			}
+			else
+			{
+				i = new Intent(getApplicationContext(), MainActivity.class);
+				i.putExtra("ITEM", 1);
+				startActivity(i);
+				finish();
+			}
+			break;
+		case 5:
+			//mTitle = getString(R.string.title_settings);
+			i = new Intent(getApplicationContext(), SettingsActivity.class);
+	        startActivity(i);
+			break;
+		}
+		
+	}
 
 }

@@ -1,7 +1,10 @@
 package com.itii.biomarket;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -9,14 +12,31 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity {
+public class MapsActivity extends FragmentActivity implements
+NavigationDrawerFragment.NavigationDrawerCallbacks{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+	private NavigationDrawerFragment mNavigationDrawerFragment;
+	private String parentName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        try
+		{
+        	parentName = getIntent().getExtras().getString("PARENTNAME");
+		}
+		catch(Exception e)
+		{
+			
+		}
+        Log.println(Log.WARN, "PUTEXTRA", parentName);
+
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
+				.findFragmentById(R.id.navigation_drawer);
+		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
+				(DrawerLayout) findViewById(R.id.drawer_layout));
         setUpMapIfNeeded();
     }
 
@@ -69,4 +89,66 @@ public class MapsActivity extends FragmentActivity {
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
+
+	@Override
+	public void onNavigationDrawerItemSelected(int position) {
+		onSectionAttached(position+1);		
+	}
+
+	private void onSectionAttached(int number) {
+		
+		Log.println(Log.INFO, "MainActivity", "onSectionAttached");
+		Intent i;
+		switch (number) {
+		case 1:
+
+			if(parentName.equals("Home"))
+			{
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra("RESULT","0");
+				setResult(RESULT_OK, returnIntent);
+				finish();
+			}
+			else
+			{
+				i = new Intent(getApplicationContext(), MainActivity.class);
+				i.putExtra("ITEM", 0);
+				startActivity(i);
+				finish();
+			}
+			break;
+		case 2:
+			
+		  
+			break;
+		case 3:
+			i = new Intent(getApplicationContext(), ListStoreActivity.class);
+	        startActivity(i);
+	        finish();
+			break;
+		case 4:
+			if(parentName.equals("Home"))
+			{
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra("RESULT","1");
+				setResult(RESULT_OK, returnIntent);
+				
+				finish();
+			}
+			else
+			{
+				i = new Intent(getApplicationContext(), MainActivity.class);
+				i.putExtra("ITEM", 1);
+				startActivity(i);
+				finish();
+			}
+			break;
+		case 5:
+			//mTitle = getString(R.string.title_settings);
+			i = new Intent(getApplicationContext(), SettingsActivity.class);
+	        startActivity(i);
+			break;
+		}
+		
+	}
 }

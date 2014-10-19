@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">BioMarket</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">BioMarket</string>
     <string name="title_maps">Maps</string>
     <string name="title_basket">Basket</string>
     <string name="title_list">List</string>
