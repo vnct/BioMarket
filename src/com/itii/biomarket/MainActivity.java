@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -22,6 +23,7 @@ public class MainActivity extends Activity implements
 	 * Fragment managing the behaviors, interactions and presentation of the
 	 * navigation drawer.
 	 */
+	public static Integer page=0;
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -73,7 +75,7 @@ public class MainActivity extends Activity implements
 		Log.println(Log.INFO, "MainActivity", "onCreate");
 
 		
-
+		
 				
 
 	}
@@ -87,7 +89,7 @@ public class MainActivity extends Activity implements
 		}
 		catch(Exception e)
 		{
-			
+			mViewPager.setCurrentItem(page);
 		}
 	//	
 		
@@ -95,17 +97,6 @@ public class MainActivity extends Activity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		try{
-//			itemCurrent = getIntent().getExtras().getInt("ITEM");
-//			Log.println(Log.WARN, "Maint Acitivty - onResume", itemCurrent+"");
-//			mViewPager.setCurrentItem(itemCurrent);
-		}
-		catch(Exception e)
-		{
-			
-		}
-		
-		
 	};
 	
 
@@ -143,6 +134,7 @@ public class MainActivity extends Activity implements
 			
 		    i = new Intent(getApplicationContext(), MapsActivity.class);
 		    i.putExtra("PARENTNAME",parentname);
+		    i.putExtra("BASKET", false);
 	        startActivityForResult(i, 1);
 	    
 	        
@@ -150,6 +142,7 @@ public class MainActivity extends Activity implements
 		case 3:
 			i = new Intent(getApplicationContext(), ListStoreActivity.class);;
 			i.putExtra("PARENTNAME",parentname);
+			i.putExtra("BASKET", false);
 	        startActivityForResult(i, 1);
 			break;
 		case 4:
@@ -171,17 +164,23 @@ public class MainActivity extends Activity implements
 		actionBar.setTitle(mTitle);
 	}
 
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		
+	
+	    
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
-			getMenuInflater().inflate(R.menu.main, menu);
+			//getMenuInflater().inflate(R.menu.main, menu);
 			restoreActionBar();
 			return true;
 		}
-		return super.onCreateOptionsMenu(menu);
+		//return super.onCreateOptionsMenu(menu);
+		return true;
 	}
 
 	@Override
@@ -189,10 +188,31 @@ public class MainActivity extends Activity implements
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		 int id = item.getItemId();
+		 switch (id) {
+		case R.id.menu_basket_new:
+			mViewPager.setCurrentItem(0);
+			break;
+		case R.id.menu_basket_location:
+			Intent i;
+			i = new Intent(getApplicationContext(), MapsActivity.class);
+		    i.putExtra("PARENTNAME","Home");
+		    i.putExtra("BASKET", true); // on spécifie qu'on va chercher le contenu du basket
+	        startActivityForResult(i, 1);		
+			break;
+		case R.id.menu_basket_discard:
+			// TODO : Supprimer Panier + POP UP
+			break;
+		case R.id.action_settings:
+			i = new Intent(getApplicationContext(), SettingsActivity.class);
+	        startActivity(i);
+			break;
+		default:
+			break;
 		}
+		
+		 
+		 
 		return super.onOptionsItemSelected(item);
 	}
 

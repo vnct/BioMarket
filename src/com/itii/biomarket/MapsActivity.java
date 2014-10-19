@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -26,12 +27,13 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
         try
 		{
         	parentName = getIntent().getExtras().getString("PARENTNAME");
+        	Log.println(Log.WARN, "PUTEXTRA", parentName);
 		}
 		catch(Exception e)
 		{
 			
 		}
-        Log.println(Log.WARN, "PUTEXTRA", parentName);
+        
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
@@ -112,8 +114,9 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 			else
 			{
 				i = new Intent(getApplicationContext(), MainActivity.class);
-				i.putExtra("ITEM", 0);
-				startActivity(i);
+				i.putExtra("RESULT", "0");
+				MainActivity.page=0;
+				setResult(RESULT_OK, i);
 				finish();
 			}
 			break;
@@ -138,8 +141,10 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 			else
 			{
 				i = new Intent(getApplicationContext(), MainActivity.class);
-				i.putExtra("ITEM", 1);
-				startActivity(i);
+				i.putExtra("RESULT", "1");
+				MainActivity.page=1;
+				setResult(RESULT_OK, i);
+				//startActivity(i);
 				finish();
 			}
 			break;
@@ -150,5 +155,25 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 			break;
 		}
 		
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		 switch (id) {
+		 case R.id.menu_maps_list:
+			 Intent i;
+			 i = new Intent(getApplicationContext(), ListStoreActivity.class);;
+			 i.putExtra("BASKET", true);
+			 i.putExtra("PARENTNAME","Maps");
+			 startActivity(i);
+		     finish();
+			 break;
+		 case R.id.action_settings:
+			 i = new Intent(getApplicationContext(), SettingsActivity.class);
+		     startActivity(i);
+			 break;
+		 }
+		return super.onOptionsItemSelected(item);
 	}
 }

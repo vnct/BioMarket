@@ -21,11 +21,11 @@
     <string name="title_section3">Section 3</string>
     <string name="title_activity_list_store">ListStoreActivity</string>
 
-    <string name="basket_delete">Delete</string>
+    <string name="basket_discard">Delete Basket</string>
     <string name="basket_new">Add</string>
     <string name="basket_location">Shopping</string>
-
-
+	<string name="maps_list">Liste des magasins</string>
+	<string name="list_maps">Carte des magasins</string>
     <string name="multiautocompletetextview">MultiAutoCompleteTextView</string>
     <string name="entrez_un_produit">Entrez un produit</string>
     <string name="ajouter_au_panier">Ajouter au panier</string>

@@ -3,10 +3,10 @@
     tools:context="com.itii.biomarket.ListStoreActivity" >
 
      <item
-        android:id="@+id/menu_basket_location"
+        android:id="@+id/menu_list_maps"
         android:icon="@drawable/ic_action_location_map"
         android:showAsAction="ifRoom|collapseActionView"
-        android:title="@string/basket_location"/>
+        android:title="@string/list_maps"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

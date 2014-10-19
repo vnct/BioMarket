@@ -3,20 +3,21 @@
     tools:context="com.itii.biomarket.MainActivity" >
 
     <item
-        android:id="@+id/menu_basket_delete"
-        android:icon="@drawable/ic_action_content_remove"
+        android:id="@+id/menu_basket_discard"
+        android:icon="@drawable/ic_action_content_discard"
         android:showAsAction="ifRoom|collapseActionView"
-        android:title="@string/basket_delete"/>
-     <item
-        android:id="@+id/menu_basket_new"
-        android:icon="@drawable/ic_action_content_new"
-        android:showAsAction="ifRoom|collapseActionView"
-        android:title="@string/basket_new"/>
+        android:title="@string/basket_discard"/>
+
       <item
         android:id="@+id/menu_basket_location"
         android:icon="@drawable/ic_action_location_place"
         android:showAsAction="ifRoom|collapseActionView"
         android:title="@string/basket_location"/>
+       <item
+        android:id="@+id/menu_basket_new"
+        android:icon="@drawable/ic_action_content_new"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/basket_new"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

@@ -8,10 +8,12 @@ import java.util.List;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -47,9 +49,26 @@ public class BasketFragment extends Fragment {
 		public BasketFragment() {
 		}
 
+		
+		 @Override
+		    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		        super.onCreateOptionsMenu(menu, inflater);
+		        inflater.inflate(R.menu.main, menu);
+		        MenuItem menu_basket_discard = menu.findItem(R.id.menu_basket_discard);
+		        MenuItem menu_basket_location = menu.findItem(R.id.menu_basket_location);
+		        MenuItem menu_basket_new = menu.findItem(R.id.menu_basket_new);
+		        MenuItem menu_action_settings = menu.findItem(R.id.action_settings);
+		        menu_basket_discard.setVisible(true);
+		        menu_basket_location.setVisible(true);
+		        menu_basket_new.setVisible(true);
+		        menu_action_settings.setVisible(false);
+		 }
+		
+		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
+			setHasOptionsMenu(true);
 			View rootView = inflater.inflate(R.layout.fragment_basket,
 					container, false);
 			
@@ -63,6 +82,15 @@ public class BasketFragment extends Fragment {
 		        listViewbasket.setAdapter(new BasketBaseAdapter(getActivity(),toto));
 			
 			return rootView;
+		}
+		
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+
+
+			
+			 
+		return super.onOptionsItemSelected(item);
 		}
 	
 }

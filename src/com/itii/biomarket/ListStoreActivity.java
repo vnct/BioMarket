@@ -25,6 +25,8 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 	private String parentName;
 
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,9 +65,20 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
+		switch (id) {
+		 case R.id.menu_list_maps:
+			 Intent i;
+			 i = new Intent(getApplicationContext(), MapsActivity.class);;
+			 i.putExtra("BASKET", true);
+			 i.putExtra("PARENTNAME","List");
+			 startActivity(i);
+		     finish();
+			 break;
+		 case R.id.action_settings:
+			 i = new Intent(getApplicationContext(), SettingsActivity.class);
+		     startActivity(i);
+			 break;
+		 }
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -76,7 +89,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 		
 	}
 
-private void onSectionAttached(int number) {
+	private void onSectionAttached(int number) {
 		
 		Log.println(Log.INFO, "MainActivity", "onSectionAttached");
 		Intent i;
@@ -93,8 +106,9 @@ private void onSectionAttached(int number) {
 			else
 			{
 				i = new Intent(getApplicationContext(), MainActivity.class);
-				i.putExtra("ITEM", 0);
-				startActivity(i);
+				i.putExtra("RESULT", "0");
+				MainActivity.page=0;
+				setResult(RESULT_OK, i);
 				finish();
 			}
 			break;
@@ -119,8 +133,9 @@ private void onSectionAttached(int number) {
 			else
 			{
 				i = new Intent(getApplicationContext(), MainActivity.class);
-				i.putExtra("ITEM", 1);
-				startActivity(i);
+				i.putExtra("RESULT", "1");
+				MainActivity.page=1;
+				setResult(RESULT_OK, i);
 				finish();
 			}
 			break;
@@ -132,5 +147,9 @@ private void onSectionAttached(int number) {
 		}
 		
 	}
+	
+	
+
+
 
 }
