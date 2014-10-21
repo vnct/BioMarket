@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.itii.biomarket.MainActivity" >
+
+    <item
+        android:id="@+id/menu_basket_delete"
+        android:icon="@drawable/ic_action_content_remove"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/basket_delete"/>
+
+      <item
+        android:id="@+id/menu_basket_up"
+        android:icon="@drawable/ic_action_navigation_collapse"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/basket_up"/>
+       <item
+        android:id="@+id/menu_basket_down"
+        android:icon="@drawable/ic_action_navigation_expand"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/basket_down"/>
+   
+</menu>

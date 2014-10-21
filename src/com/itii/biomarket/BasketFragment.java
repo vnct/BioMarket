@@ -9,13 +9,16 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 /**
@@ -34,7 +37,10 @@ public class BasketFragment extends Fragment {
 		 */
 		private static final String ARG_SECTION_NUMBER = "section_number";
 
-		
+		private BasketBaseAdapter basketBaseAdapter = null; 
+		private List<String> toto = new ArrayList<String>();
+
+		private ListView listViewbasket;
 		/**
 		 * Returns a new instance of this fragment for the given section number.
 		 */
@@ -73,16 +79,106 @@ public class BasketFragment extends Fragment {
 					container, false);
 			
 			
-			 List<String> toto = new ArrayList<String>();
+			 
 		        toto.add("basket 1");
 		        toto.add("basket 2");
 		        toto.add("basket 3");
 		        //listViewstore = (ListView)findViewById(R.id.listViewStore);
-		        ListView listViewbasket = (ListView)rootView.findViewById(R.id.listViewbasket);
-		        listViewbasket.setAdapter(new BasketBaseAdapter(getActivity(),toto));
+		        listViewbasket = (ListView)rootView.findViewById(R.id.listViewbasket);
+		        basketBaseAdapter = new BasketBaseAdapter(getActivity(),toto);
+		        listViewbasket.setAdapter(basketBaseAdapter);
+		        listViewbasket.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		        listViewbasket.setOnItemClickListener(OnItemClickListenerbasket);
 			
 			return rootView;
 		}
+		
+		int position1=-1;
+		ActionMode actionMode;
+	    private AdapterView.OnItemClickListener OnItemClickListenerbasket = new AdapterView.OnItemClickListener() {
+	        @Override
+	        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+	            for (int j = 0; j < adapterView.getChildCount(); j++)
+	                adapterView.getChildAt(j).setBackgroundColor(Color.TRANSPARENT);
+
+	            if(position1==position)
+	            {
+	                actionMode.finish();
+	            }
+	            view.setBackgroundColor(Color.LTGRAY);
+	            changeContextual(view, position);
+	            position1=position;
+
+	            
+	        }
+	        
+	        private void changeContextual(View view, final int position) {
+	        	final View view1= view;
+	    		if(getActivity()!=null)
+	    		{
+	    			actionMode = getActivity().startActionMode(new ActionMode.Callback() {
+
+						@Override
+						public boolean onCreateActionMode(ActionMode mode,
+								Menu menu) {
+							 try
+				                {
+				                    MenuInflater inflater = mode.getMenuInflater();
+				                    inflater.inflate(R.menu.main_contextual, menu);
+				                    return true;
+				                }
+				                catch (NullPointerException e)
+				                {
+				                    return false;
+				                }
+						}
+
+						@Override
+						public boolean onPrepareActionMode(ActionMode mode,
+								Menu menu) {
+							// TODO Auto-generated method stub
+							return false;
+						}
+
+						@Override
+						public boolean onActionItemClicked(ActionMode mode,
+								MenuItem item) {
+							switch (item.getItemId()) {
+							 case R.id.menu_basket_down:
+								
+								return true;
+							 case R.id.menu_basket_up:
+									
+									return true;
+							 case R.id.menu_basket_delete:
+								 String basket_item = (String) basketBaseAdapter.getItem(position);
+								 toto.remove(basket_item);
+								 basketBaseAdapter = new BasketBaseAdapter(getActivity(),toto);
+								 listViewbasket.setAdapter(basketBaseAdapter);
+								 listViewbasket.setOnItemClickListener(OnItemClickListenerbasket);
+			                        actionMode.finish();
+									return true;
+
+							
+							}
+							return false;
+						}
+
+						@Override
+						public void onDestroyActionMode(ActionMode mode) {
+							view1.setBackgroundColor(Color.TRANSPARENT);
+							
+						}
+	    				
+	    			});
+	    		}
+
+				
+			}
+
+			
+	    };
+	    
 		
 		@Override
 		public boolean onOptionsItemSelected(MenuItem item) {

@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -103,16 +104,16 @@ public class NavigationDrawerFragment extends Fragment {
 						selectItem(position);
 					}
 				});
+	
 		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
 				.getThemedContext(),
-				android.R.layout.simple_list_item_activated_1,
+				android.R.layout.simple_list_item_1,
 				android.R.id.text1, new String[] {
 						getString(R.string.title_home),
 						getString(R.string.title_maps),
 						getString(R.string.title_list),
 						getString(R.string.title_basket),
-						getString(R.string.title_settings),}));
-		//mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+						getString(R.string.title_settings),}));	
 		return mDrawerListView;
 	}
 
@@ -213,7 +214,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private void selectItem(int position) {
 		//mCurrentSelectedPosition = position;
 		if (mDrawerListView != null) {
-			//mDrawerListView.setItemChecked(position, true);
+			mDrawerListView.setItemChecked(position, true);
 		}
 		if (mDrawerLayout != null) {
 			mDrawerLayout.closeDrawer(mFragmentContainerView);

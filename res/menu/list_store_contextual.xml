@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.itii.biomarket.ListStoreActivity" >
+
+     <item
+        android:id="@+id/menu_store_maps"
+        android:icon="@drawable/ic_action_location_place"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/store_maps"/>
+
+</menu>

@@ -20,10 +20,14 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="title_activity_list_store">ListStoreActivity</string>
-
     <string name="basket_discard">Delete Basket</string>
+    <string name="basket_up">+1</string>
+    <string name="basket_down">-1</string>
     <string name="basket_new">Add</string>
+    <string name="store_maps">Add</string>
+    
     <string name="basket_location">Shopping</string>
+    <string name="basket_delete">Delete item</string>
 	<string name="maps_list">Liste des magasins</string>
 	<string name="list_maps">Carte des magasins</string>
     <string name="multiautocompletetextview">MultiAutoCompleteTextView</string>
