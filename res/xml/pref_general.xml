@@ -32,13 +32,22 @@
         android:positiveButtonText="@null"
         android:title="@string/pref_title_add_friends_to_messages" />-->
         
-        <SeekBarPreference
+     <!--  <SeekBarPreference
   			 android:defaultValue="50"
   			 android:max="200"
   		
    				android:title="@string/pref_distance"
    				android:key="seekBar">
-   </SeekBarPreference>
+   </SeekBarPreference>  --> 
+   
+    <ListPreference
+        android:defaultValue="50"
+        android:entries="@array/pref_distance_list"
+        android:entryValues="@array/pref_distance_list"
+        android:key="distance_settings"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_distance" />
         
         
 
