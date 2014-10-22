@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
    
   >
-         >
+         
 
         <GridLayout
             android:layout_width="wrap_content"
@@ -45,21 +45,21 @@
                 android:id="@+id/view1"
                 android:layout_width="fill_parent"
                 android:layout_height="137dp"
-                android:layout_gravity="left" />
+                android:layout_gravity="start" />
 
             <Button
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Acheter" />
+                android:layout_gravity="start"
+                android:text="Ajouter au panier" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Ajouter au panier" />
+                android:text="Acheter" />
         </GridLayout>
 
        

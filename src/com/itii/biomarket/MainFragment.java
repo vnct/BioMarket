@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,6 +31,7 @@ public class MainFragment extends Fragment {
 	
 	public static  MainFragment newInstance(int sectionNumber) {
 		MainFragment fragment = new MainFragment();
+
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
@@ -45,25 +45,20 @@ public class MainFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_main, container,
 				false);
 		
-		//GridLayout gl = (GridLayout) rootView.findViewById(R.id.GridLayout1);
+		/** Mise en place de l'autocomplétion dans la barre de recherche **/
 		AutoCompleteTextView autoComplete = (AutoCompleteTextView)rootView.findViewById(R.id.autoCompleteTextView1);
-
-		
-//		String[] autoCompletString = getResources().getStringArray(R.array.autoCompletion);
-		
-//		String autoCompletString[]={"Arun","Mathev","Vishnu","Vishal","Arjun",
-//        		"Arul","Balaji","Babu","Boopathy","Godwin","Nagaraj"};
  
-		
-		
-		
+		/** Instanciation de l'objet permettant de gérer le magasin et les articles **/
 		StoreManagement DAOS = new StoreManagement(this.getActivity());
         DAOS.open();
 
+        /** Déclaration d'une liste d'objet Article **/
         List<Article> ArticleGet = DAOS.getArticles();
         
+        /** Déclaration d'un tableau de String de la taille de la liste précédente **/
         String[] autoCompletString = new String[ArticleGet.size()];
         
+        /** Récupération des noms des articles de la liste pou les mettre dans le tableau de String  **/
         if(ArticleGet != null) {
         	int i = 0;
         	
@@ -74,6 +69,7 @@ public class MainFragment extends Fragment {
 			}
         }
 
+        /** ArrayAdaptater permet un affichage de la liste avec le style Android **/
 		ArrayAdapter<String> adp=new ArrayAdapter<String>(this.getActivity(),
         		android.R.layout.simple_dropdown_item_1line,autoCompletString);
  
