@@ -25,6 +25,10 @@
     <string name="basket_down">-1</string>
     <string name="basket_new">Add</string>
     <string name="store_maps">Add</string>
+   <string name="alert_dialog_ok">Navigate to</string> 
+     <string name="alert_dialog_title">Navigation</string> 
+       <string name="alert_dialog_comment">Do you want to navigate to this store ?</string> 
+    <string name="alert_dialog_cancel">Cancel</string>
     
     <string name="basket_location">Shopping</string>
     <string name="basket_delete">Delete item</string>
