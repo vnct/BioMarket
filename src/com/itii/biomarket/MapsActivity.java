@@ -44,7 +44,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 		}
         
       //  mMap.setMyLocationEnabled(true);
-
+     // Ajoute le navigation drawer
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
@@ -57,6 +57,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
         super.onResume();
         setUpMapIfNeeded();
     }
+    // Créer le menu
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -139,6 +140,8 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 		onSectionAttached(position+1);		
 	}
 
+	
+	// Permet de créer les actions en fonction des clics que le navigation drawer
 	private void onSectionAttached(int number) {
 		
 		Log.println(Log.INFO, "MainActivity", "onSectionAttached");
@@ -199,6 +202,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 		
 	}
 	
+	// Permet de créer les actions en fonction des clics que l'action bar
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();

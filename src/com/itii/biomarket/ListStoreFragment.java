@@ -75,6 +75,7 @@ public class ListStoreFragment extends Fragment {
 		  super.onCreateOptionsMenu(menu, inflater);
 
 	  }
+	  // Clic sur un element de la liste déclenche cette action
 	private AdapterView.OnItemClickListener OnItemClickListenerViewstore = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -92,6 +93,7 @@ public class ListStoreFragment extends Fragment {
 
         }
     
+        // apparation du menu contextuel et de ses actions associées
 	public void changeContextual(View view, final int position) 
 	{
 		final View view1= view;
