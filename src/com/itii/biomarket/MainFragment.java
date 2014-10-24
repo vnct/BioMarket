@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import com.itii.biomarket.controler.BasketManagement;
+import com.itii.biomarket.controler.StoreManagement;
 import com.itii.biomarket.model.Article;
-import com.itii.biomarket.model.StoreManagement;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -55,9 +56,7 @@ public class MainFragment extends Fragment {
  
 		
 		
-		
-		StoreManagement DAOS = new StoreManagement(this.getActivity());
-        DAOS.open();
+		BasketManagement DAOS = new BasketManagement(this.getActivity());
 
         List<Article> ArticleGet = DAOS.getArticles();
         
