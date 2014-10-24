@@ -4,13 +4,10 @@ package com.itii.biomarket;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-import android.app.ListFragment;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
