@@ -5,12 +5,10 @@ package com.itii.biomarket;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.graphics.Color;
-import android.os.Bundle;
+
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;

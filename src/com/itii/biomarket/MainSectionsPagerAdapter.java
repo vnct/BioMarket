@@ -8,9 +8,7 @@ import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
 
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
