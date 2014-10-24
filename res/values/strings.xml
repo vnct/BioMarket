@@ -27,16 +27,20 @@
     <string name="store_maps">Add</string>
    <string name="alert_dialog_ok">Navigate to</string> 
      <string name="alert_dialog_title">Navigation</string> 
-       <string name="alert_dialog_comment">Do you want to navigate to this store ?</string> 
+      <string name="alert_dialog_comment">Do you want to navigate to this store ?</string> 
     <string name="alert_dialog_cancel">Cancel</string>
     
     <string name="basket_location">Shopping</string>
     <string name="basket_delete">Delete item</string>
-	<string name="maps_list">Liste des magasins</string>
-	<string name="list_maps">Carte des magasins</string>
+	<string name="maps_list">Stores list</string>
+	<string name="list_maps">Stores maps</string>
     <string name="multiautocompletetextview">MultiAutoCompleteTextView</string>
-    <string name="entrez_un_produit">Entrez un produit</string>
-    <string name="ajouter_au_panier">Ajouter au panier</string>
-    <string name="trouver_le_plus_proche">Trouver le plus proche</string>
+    <string name="entrez_un_produit">Add a product</string>
+    <string name="fragment_main_basket">Add to basket</string>
+    <string name="trouver_le_plus_proche">Find the closest</string>
+      <string name="fragment_main_buy">Buy</string>
+        <string name="fragment_main_hint">Enter a product to find</string>
+
+    
 
 </resources>
