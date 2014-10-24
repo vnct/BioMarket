@@ -109,11 +109,13 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
         mMap.addMarker(new MarkerOptions().position(new LatLng(40, 0)).title("Marker"));
         mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 			
+        	// En cas de clic sur un market
 			@Override
 			public boolean onMarkerClick(Marker arg0) {
 				
 				try
-				{
+				{ 
+					// on ouvre une texte box
 					DialogFragment newFragment = MapsAlertDialogFragment.newInstance(
 				            R.string.alert_dialog_title,String.valueOf(arg0.getPosition().latitude),String.valueOf(arg0.getPosition().longitude));
 				    newFragment.show(getFragmentManager(), "dialog");
