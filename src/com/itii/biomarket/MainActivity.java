@@ -80,7 +80,7 @@ public class MainActivity extends Activity implements
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try
 		{
-			Log.println(Log.WARN, "Maint Acitivty - onActivityResult", data.getStringExtra("RESULT"));
+			Log.println(Log.WARN, "Main Acitivty - onActivityResult", data.getStringExtra("RESULT"));
 			mViewPager.setCurrentItem(Integer.parseInt(data.getStringExtra("RESULT")));
 		}
 		catch(Exception e)

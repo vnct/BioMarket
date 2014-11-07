@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+// Classe pour générer des alertedialgo
 public class MapsAlertDialogFragment extends DialogFragment{
 	public static MapsAlertDialogFragment newInstance(int title,String latitute,String longitude) {
 		MapsAlertDialogFragment frag = new MapsAlertDialogFragment();

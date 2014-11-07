@@ -36,6 +36,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 		{
 			
 		}
+		// Ajout du navigation drawer
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
@@ -55,6 +56,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 				return true;
 	}
 
+	// Actions sur l'action bar
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -85,6 +87,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 		
 	}
 
+	// actions relatives  au navigation drawer
 	private void onSectionAttached(int number) {
 		
 		Log.println(Log.INFO, "MainActivity", "onSectionAttached");

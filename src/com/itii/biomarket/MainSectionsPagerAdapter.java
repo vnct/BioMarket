@@ -35,6 +35,7 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
     }
 
 
+    // Permet de creer le nombre de fragment necessaire à la page HOmePAGE
 	@Override
 	public Fragment getItem(int position) {
 		// getItem is called to instantiate the fragment for the given page.

@@ -53,7 +53,7 @@ public class BasketFragment extends Fragment {
 		public BasketFragment() {
 		}
 
-		
+		// Création de l'action bar initiale
 		 @Override
 		    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		        super.onCreateOptionsMenu(menu, inflater);
@@ -93,6 +93,8 @@ public class BasketFragment extends Fragment {
 		
 		int position1=-1;
 		ActionMode actionMode;
+		
+		// En cas de clic sur un element de la liste
 	    private AdapterView.OnItemClickListener OnItemClickListenerbasket = new AdapterView.OnItemClickListener() {
 	        @Override
 	        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -110,6 +112,7 @@ public class BasketFragment extends Fragment {
 	            
 	        }
 	        
+	        // appel de la méthode pour faire apparaitre le menu contextuel
 	        private void changeContextual(View view, final int position) {
 	        	final View view1= view;
 	    		if(getActivity()!=null)

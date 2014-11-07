@@ -47,6 +47,7 @@ public class StoreBaseAdapter extends BaseAdapter{
 		 return position;
 	}
 
+	// Permet de créer la tete de la liste a afficher dans la storelist
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		 View vue = null;

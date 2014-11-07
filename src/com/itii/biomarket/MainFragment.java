@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 import com.itii.biomarket.model.Article;
-import com.itii.biomarket.model.StoreManagement;
+import com.itii.biomarket.model.BasketDB;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -49,11 +49,11 @@ public class MainFragment extends Fragment {
 		AutoCompleteTextView autoComplete = (AutoCompleteTextView)rootView.findViewById(R.id.autoCompleteTextView1);
  
 		/** Instanciation de l'objet permettant de gérer le magasin et les articles **/
-		StoreManagement DAOS = new StoreManagement(this.getActivity());
-        DAOS.open();
+		BasketDB Basket_DAOS = new BasketDB(this.getActivity());
+		Basket_DAOS.open();
 
         /** Déclaration d'une liste d'objet Article **/
-        List<Article> ArticleGet = DAOS.getArticles();
+        List<Article> ArticleGet = Basket_DAOS.getArticles();
         
         /** Déclaration d'un tableau de String de la taille de la liste précédente **/
         String[] autoCompletString = new String[ArticleGet.size()];
