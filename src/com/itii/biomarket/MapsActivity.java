@@ -1,6 +1,10 @@
 package com.itii.biomarket;
 
+
+import android.app.DialogFragment;
+
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -8,9 +12,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements
@@ -34,6 +43,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 			
 		}
         
+      //  mMap.setMyLocationEnabled(true);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
@@ -69,6 +79,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
      * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
      * method in {@link #onResume()} to guarantee that it will be called.
      */
+    
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
@@ -77,7 +88,10 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
+            	mMap.setMyLocationEnabled(true);
                 setUpMap();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(44, 5), 4.0f));
+              
             }
         }
     }
@@ -89,7 +103,35 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+   	
+    	// TODO RECUPERER LES STORES AVEC LEURS NOMS
+        mMap.addMarker(new MarkerOptions().position(new LatLng(40, 0)).title("Marker"));
+        mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+			
+			@Override
+			public boolean onMarkerClick(Marker arg0) {
+				
+				try
+				{
+					DialogFragment newFragment = MapsAlertDialogFragment.newInstance(
+				            R.string.alert_dialog_title,String.valueOf(arg0.getPosition().latitude),String.valueOf(arg0.getPosition().longitude));
+				    newFragment.show(getFragmentManager(), "dialog");
+					/*Intent i = new Intent(Intent.ACTION_VIEW, 
+				     			Uri.parse("google.navigation:q=" + String.valueOf(arg0.getPosition().latitude)+","+String.valueOf(arg0.getPosition().longitude))); 
+				     			startActivity(i);*/
+				}
+	             catch(Exception e)
+	             {
+	            	 
+	             }
+	     						
+	               
+				return false;
+			
+				
+			}
+			
+		});
     }
 
 	@Override
@@ -176,4 +218,8 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 		 }
 		return super.onOptionsItemSelected(item);
 	}
+
+
+
+	
 }

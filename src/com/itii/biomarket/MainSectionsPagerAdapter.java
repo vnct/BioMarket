@@ -8,6 +8,7 @@ import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.util.Log;
 
+
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
  * must implement the {@link BlankFragment.OnFragmentInteractionListener}

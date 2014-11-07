@@ -3,10 +3,8 @@
          xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/GridLayout1"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-   
-  >
-         
+    android:layout_height="wrap_content" >
+
 
         <GridLayout
             android:layout_width="wrap_content"
@@ -36,7 +34,7 @@
                 android:layout_marginTop="30dp"
                 android:ems="10"
                 android:gravity="start"
-                android:hint="Entrez un article à rechercher" >
+                android:hint="@string/fragment_main_hint" >
 
                 <requestFocus />
             </AutoCompleteTextView>
@@ -51,15 +49,17 @@
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="Ajouter au panier" />
+                android:layout_gravity="left"
+                android:text="@string/fragment_main_buy" />
+
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Acheter" />
+                android:text="@string/fragment_main_basket" />
+
         </GridLayout>
 
        

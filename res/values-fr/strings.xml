@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BioMarket</string>
+    <string name="title_home">BioMarket</string>
+    <string name="title_maps">Carte</string>
+    <string name="title_basket">Panier</string>
+    <string name="title_list">Liste</string>
+    <string name="title_settings">Réglages</string>
+    <string name="navigation_drawer_open">Ouvrir volet navigation</string>
+    <string name="navigation_drawer_close">Fermer volet navigation</string>
+    <string name="action_example">Action Exemple</string>
+    <string name="action_settings">Réglages</string>
+    <string name="hello_blank_fragment">Bonjour Fragment</string>
+    <string name="title_activity_basket">Panier</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_toto_fragment">Hello toto fragment</string>
+    <string name="title_activity_maps">Cartes</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_list_store">ListStoreActivity</string>
+    <string name="basket_discard">Supprimer Panier</string>
+    <string name="basket_up">+1</string>
+    <string name="basket_down">-1</string>
+    <string name="basket_new">Ajouter</string>
+    <string name="store_maps">Ajouter</string>
+   <string name="alert_dialog_ok">Naviguer vers</string> 
+     <string name="alert_dialog_title">Navigation</string> 
+      <string name="alert_dialog_comment">Voulez-vous lancer la navigation vers ce magasin ? </string> 
+    <string name="alert_dialog_cancel">Annuler</string>
+    
+    <string name="basket_location">Y Aller</string>
+    <string name="basket_delete">Supprimer element</string>
+	<string name="maps_list">Liste des magasins</string>
+	<string name="list_maps">Carte des magasins</string>
+    <string name="multiautocompletetextview">MultiAutoCompleteTextView</string>
+    <string name="entrez_un_produit">Entrer un produit</string>
+    <string name="fragment_main_basket">Ajouter au panier</string>
+    <string name="trouver_le_plus_proche">Trouver le plus proche</string>
+      <string name="fragment_main_buy">Acheter</string>
+       <string name="fragment_main_hint">Entrez un article à rechercher</string>
+
+</resources>
