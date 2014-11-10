@@ -1,5 +1,6 @@
 package com.itii.biomarket.model;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,22 +8,31 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-public class BasketDB extends DAOBase {	
+public class BasketDB extends DAOBase {
 	
 	public BasketDB(Context pContext) {
 		super(pContext);
 		// TODO Auto-generated constructor stub
 	}
-
-	// renvoi la liste des articles (+ catï¿½gories)
-		public List<Article> getArticles() {
-			// CODE
-			/*Example of usage 
-			 * 
-			StoreManagement DAOS = new StoreManagement(this);
-	        DAOS.open();
-
-	        List<Article> ArticleGet = DAOS.getArticles();
+	
+	// renvoi la liste des articles (+ catégories)
+	public List<Article> getArticles() throws SQLException {
+		// CODE
+		/*
+		 * 
+			Example of usage 
+			---------------- 
+			
+			BasketDB basket = new BasketDB(this);
+	        basket.open();
+	
+	        List<Article> ArticleGet = null;
+			try {
+				ArticleGet = basket.getArticles();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	        String result = "";
 	        if(ArticleGet != null) {
 				for(Article m : ArticleGet)
@@ -30,9 +40,12 @@ public class BasketDB extends DAOBase {
 	        	intitule.setText(result);
 	        }
 	        else
-	        	intitule.setText("Pas de donnï¿½es trouvï¿½es");  
-			 */
-
+	        	intitule.setText("Pas de données trouvées"); 
+		 
+		 *
+		 */
+		
+		try {
 			List<Article> l = new LinkedList<Article>();
 			Cursor c = mDb.rawQuery("SELECT id_produit, nom_produit, origine_produit, nom_categorie "
 					+ "FROM produit "
@@ -52,24 +65,56 @@ public class BasketDB extends DAOBase {
 				c.close();
 				return l;
 			}
-			else
-				return null;
+		} catch(Exception ex) {
+			Log.e("FonctiongetArticles (storeManagement) : ", "Problème autre que SQL dans la fonction", ex);
 		}
+		return null;
+	}
 
-		// renvoi la liste des articles (liste car un article peut ï¿½tre prï¿½sent dans plusieurs magasins).
-		public List<Article> getArticle(String nomArticle) {
-			if(nomArticle == null || nomArticle == "") {
-				Log.d("Problï¿½me application: fonction getArticle (StoreManagement)", "Aucun nom d'article passï¿½ ï¿½ la fonction (ou vide)");
-				System.exit(0);
+	// renvoi la liste des articles (liste car un article peut être présent dans plusieurs magasins).
+	public List<Article> getArticle(String nomArticle) throws SQLException {
+		
+		// CODE
+			/*
+			
+			Example of usage 
+			----------------
+
+			BasketDB basket = new BasketDB(this);
+	        basket.open();
+	
+	        List<Article> ArticleGet = null;
+			try {
+				ArticleGet = basket.getArticle("carotte");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+	        String result = "";
+	        if(ArticleGet != null) {
+				for(Article m : ArticleGet)
+	        		result += m.getId() + ", " + m.getNom() + ", " + m.getOrigine() + ", " + m.getCategorie() + ", " + m.getLatitude_dg() + ", " + m.getLongitude_dg() + "\n"; 
+	        	intitule.setText(result);
+	        }
+	        else
+	        	intitule.setText("Pas de données trouvées"); 
+
+
+			*/
+		
+		if(nomArticle == null || nomArticle == "") {
+			Log.d("Problème application: fonction getArticle (StoreManagement)", "Aucun nom d'article passé à la fonction (ou vide)");
+			System.exit(0);
+		}
+		try {
 			List<Article> l = new LinkedList<Article>();
 			Cursor c = mDb.rawQuery(
 					"SELECT produit.id_produit, nom_produit, origine_produit, nom_categorie, latitude_dg, longitude_dg "
-							+ "FROM produit, categorie, vend, commercant, donnesgeographiques "
+							+ "FROM produit, categorie, vend, commercant, donneesgeographiques "
 							+ "WHERE produit.id_categorie = categorie.id_categorie "
 							+ "AND commercant.id_commercant = vend.id_commercant "
 							+ "AND produit.id_produit = vend.id_produit "
-							+ "AND commercant.id_dg = donnesgeographiques.id_dg "
+							+ "AND commercant.id_dg = donneesgeographiques.id_dg "
 							+ "AND nom_produit='" + nomArticle + "'"
 							, null);
 			
@@ -82,47 +127,68 @@ public class BasketDB extends DAOBase {
 					String categorieP = c.getString(3);
 					float latitudeP = c.getFloat(4);
 					float longitudeP = c.getFloat(5);
-					Log.d("infos articles","Recupï¿½rï¿½es : " + c.getFloat(4) + ", " + c.getFloat(5));
+					Log.d("infos articles","Recupérées : " + c.getFloat(4) + ", " + c.getFloat(5));
 					Article m = new Article(idP, nomP, origineP, categorieP, latitudeP, longitudeP);
 					l.add(m);
 				}
 				c.close();
 				return l;
 			}
-			else
-				return null;
+		} catch(Exception ex) {
+			Log.e("Fonction getArticle(nomArticle) (storeManagement) : ", "Problème autre que SQL dans la fonction", ex);
 		}
+		return null;
+	}
 		
-		// renvoi l'article, dont le magasin est le plus proche du client.
-		public Article getArticleAuPlusProche(String nomArticle, float latitudeClient, float longitudeClient) {
+	// renvoi l'article, dont le magasin est le plus proche du client.
+	public Article getArticleAuPlusProche(String nomArticle, float latitudeClient, float longitudeClient) throws SQLException {
+		
+		/* CODE
+		 * 
+			Example of usage
+			----------------
 			
-			/*Example of usage
-			 * 
+			BasketDB basket = new BasketDB(this);
+	        basket.open();
+	        StoreDB DAOS = new StoreDB(this);
+	        DAOS.open();
+	        
 			float la = (float) 43.6;
 	        float lo = (float) 7.1;
-
-	        Article m = DAOS.getArticleAuPlusProche("carotte", la, lo);
+	
+	        Article m = null;
+			try {
+				m = basket.getArticleAuPlusProche("carotte", la, lo);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	        String result = "";
 	        if(m != null) {			
 				result += m.getId() + ", " + m.getNom() + ", " + m.getOrigine() + ", " + m.getCategorie() + "," + DAOS.getInfosCommercant(m.getLatitude_dg(), m.getLongitude_dg()).getNom() + "\n"; 
 	        	intitule.setText(result);
 	        }
 	        else
-	        	intitule.setText("Pas de donnï¿½es trouvï¿½es");  
-			 */
-			
-			if(nomArticle == null || nomArticle == "") {
-				Log.d("Problï¿½me application: fonction getArticleAuPlusProche (StoreManagement)", "Aucun nom d'article passï¿½ ï¿½ la fonction (ou vide)");
-				System.exit(0);
-			}
+	        	intitule.setText("Pas de données trouvées");  
+	        	
+	        	
+	        	
+		 */
+		
+		Log.d("Calcul de la fonction getArticle (donnees recues)", nomArticle + ", " + latitudeClient + ", " + longitudeClient);
+		if(nomArticle == null || nomArticle == "") {
+			Log.d("Problème application: fonction getArticleAuPlusProche (StoreManagement)", "Aucun nom d'article passé à la fonction (ou vide)");
+			System.exit(0);
+		}
+		try {
 			List<Article> articles = getArticle(nomArticle);
 			if(articles != null) {
 				if(articles.size() == 1) {
 					return articles.get(0);
 				}
 				else {
-					double distancePlusProche = -1;
 					Article articleARetourner = null;
+					double distancePlusProche = -1;
 					for(Article m : articles)  {
 						if(distancePlusProche == -1) {
 							distancePlusProche = getDistanceBetweenTwoPoints(latitudeClient, longitudeClient, m.getLatitude_dg(), m.getLongitude_dg());
@@ -136,11 +202,14 @@ public class BasketDB extends DAOBase {
 								articleARetourner = m;
 							}
 						}
+						return articleARetourner;
 					}
-					return articleARetourner;
 				}
 			}
-			else
-				return null;
 		}
+		catch(Exception ex) {
+			Log.e("Fonction getArticleAuPlusProche(nomArticle, latitude et longitude) (storeManagement) : ", "Problème autre que SQL dans la fonction", ex);
+		}
+		return null;
+	}
 }

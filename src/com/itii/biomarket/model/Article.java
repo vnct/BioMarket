@@ -1,4 +1,3 @@
-// test commit 
 package com.itii.biomarket.model;
 
 public class Article {
