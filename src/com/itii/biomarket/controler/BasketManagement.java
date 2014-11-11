@@ -1,5 +1,6 @@
 package com.itii.biomarket.controler;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.itii.biomarket.model.Article;
@@ -15,15 +16,15 @@ public class BasketManagement {
 		basketDB = new BasketDB(pContext);
 		basketDB.open();
 	}
-	public List<Article> getArticles()
+	public List<Article> getArticles() throws SQLException
 	{
 		return basketDB.getArticles();
 	}
-	public List<Article> getArticle(String nomArticle)
+	public List<Article> getArticle(String nomArticle) throws SQLException
 	{
 		return basketDB.getArticle(nomArticle);
 	}
-	public Article getArticleAuPlusProche(String nomArticle, float latitudeClient, float longitudeClient) {
+	public Article getArticleAuPlusProche(String nomArticle, float latitudeClient, float longitudeClient) throws SQLException {
 		return basketDB.getArticleAuPlusProche(nomArticle, latitudeClient, longitudeClient);
 	}
 	public List<Article> getBasket()

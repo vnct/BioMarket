@@ -1,5 +1,6 @@
 package com.itii.biomarket;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import android.app.Activity;
@@ -58,9 +59,13 @@ public class MainFragment extends Fragment {
 		
 		BasketManagement DAOS = new BasketManagement(this.getActivity());
 
-        List<Article> ArticleGet = DAOS.getArticles();
+        List<Article> ArticleGet;
+        String[] autoCompletString = new String[1];
+		try {
+			ArticleGet = DAOS.getArticles();
+		
         
-        String[] autoCompletString = new String[ArticleGet.size()];
+			autoCompletString = new String[ArticleGet.size()];
         
         if(ArticleGet != null) {
         	int i = 0;
@@ -71,6 +76,12 @@ public class MainFragment extends Fragment {
 				i++;
 			}
         }
+		
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		ArrayAdapter<String> adp=new ArrayAdapter<String>(this.getActivity(),
         		android.R.layout.simple_dropdown_item_1line,autoCompletString);
