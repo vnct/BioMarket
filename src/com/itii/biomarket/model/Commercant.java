@@ -10,6 +10,21 @@ public class Commercant {
 	private String adr_ville;
 	private float latitude_dg;
 	private float longitude_dg;
+	private double distanceWithUser;
+	
+	public Commercant(long id, String nom, String tel, String adr_numero_rue, String adr_nom_rue, String adr_cp, String adr_ville, float latitude_dg, float longitude_dg, double distanceWithUser) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.tel = tel;
+		this.adr_cp = adr_cp;
+		this.adr_numero_rue = adr_numero_rue;
+		this.adr_nom_rue = adr_nom_rue;
+		this.adr_ville = adr_ville;
+		this.latitude_dg = latitude_dg;
+		this.longitude_dg = longitude_dg;
+		this.distanceWithUser = distanceWithUser;
+	}
 	
 	public Commercant(long id, String nom, String tel, String adr_numero_rue, String adr_nom_rue, String adr_cp, String adr_ville, float latitude_dg, float longitude_dg) {
 		super();
@@ -22,6 +37,7 @@ public class Commercant {
 		this.adr_ville = adr_ville;
 		this.latitude_dg = latitude_dg;
 		this.longitude_dg = longitude_dg;
+		this.distanceWithUser = 0;
 	}
 	
 	public Commercant(long id, String nom, float latitude_dg, float longitude_dg) {
@@ -138,6 +154,14 @@ public class Commercant {
 	 */
 	public void setLongitude_dg(float longitude_dg) {
 		this.longitude_dg = longitude_dg;
+	}
+
+	public double getDistanceWithUser() {
+		return distanceWithUser;
+	}
+
+	public void setDistanceWithUser(double distanceWithUser) {
+		this.distanceWithUser = distanceWithUser;
 	}
 
 }

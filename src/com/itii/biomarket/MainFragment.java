@@ -1,5 +1,6 @@
 package com.itii.biomarket;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import android.app.Activity;
@@ -45,20 +46,22 @@ public class MainFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_main, container,
 				false);
 		
-		/** Mise en place de l'autocomplétion dans la barre de recherche **/
+		/* Mise en place de l'autocomplétion dans la barre de recherche **/
 		AutoCompleteTextView autoComplete = (AutoCompleteTextView)rootView.findViewById(R.id.autoCompleteTextView1);
  
-		/** Instanciation de l'objet permettant de gérer le magasin et les articles **/
+		/* Instanciation de l'objet permettant de gérer le magasin et les articles **/
 		BasketDB Basket_DAOS = new BasketDB(this.getActivity());
 		Basket_DAOS.open();
 
-        /** Déclaration d'une liste d'objet Article **/
-        List<Article> ArticleGet = Basket_DAOS.getArticles();
-        
-        /** Déclaration d'un tableau de String de la taille de la liste précédente **/
+        /* Déclaration d'une liste d'objet Article **/
+        List<Article> ArticleGet;
+		try {
+			ArticleGet = Basket_DAOS.getArticles();
+		
+        /* Déclaration d'un tableau de String de la taille de la liste précédente **/
         String[] autoCompletString = new String[ArticleGet.size()];
         
-        /** Récupération des noms des articles de la liste pou les mettre dans le tableau de String  **/
+        /* Récupération des noms des articles de la liste pou les mettre dans le tableau de String  **/
         if(ArticleGet != null) {
         	int i = 0;
         	
@@ -69,12 +72,15 @@ public class MainFragment extends Fragment {
 			}
         }
 
-        /** ArrayAdaptater permet un affichage de la liste avec le style Android **/
+        /* ArrayAdaptater permet un affichage de la liste avec le style Android **/
 		ArrayAdapter<String> adp=new ArrayAdapter<String>(this.getActivity(),
         		android.R.layout.simple_dropdown_item_1line,autoCompletString);
  
 		autoComplete.setAdapter(adp);
-		
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return rootView;
 	}
 
