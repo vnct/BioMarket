@@ -19,7 +19,7 @@ public class BasketDB extends DAOBase {
 			// CODE
 			/*Example of usage 
 			 * 
-			StoreManagement DAOS = new StoreManagement(this);
+			BasketDB DAOS = new BasketDB(this);
 	        DAOS.open();
 
 	        List<Article> ArticleGet = DAOS.getArticles();
