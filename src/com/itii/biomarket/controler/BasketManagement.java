@@ -8,36 +8,44 @@ import com.itii.biomarket.model.BasketDB;
 
 import android.content.Context;
 
-
 public class BasketManagement {
+	private BasketDB basketDB = null;
+	private List<Article> articles = null;
 
-	private BasketDB basketDB  = null;
 	public BasketManagement(Context pContext) {
 		basketDB = new BasketDB(pContext);
 		basketDB.open();
 	}
-	public List<Article> getArticles() throws SQLException
-	{
+
+	public List<Article> getArticles() throws SQLException {
 		return basketDB.getArticles();
 	}
-	public List<Article> getArticle(String nomArticle) throws SQLException
-	{
+
+	public List<Article> getArticle(String nomArticle) throws SQLException {
 		return basketDB.getArticle(nomArticle);
 	}
-	public Article getArticleAuPlusProche(String nomArticle, float latitudeClient, float longitudeClient) throws SQLException {
-		return basketDB.getArticleAuPlusProche(nomArticle, latitudeClient, longitudeClient);
+
+	public Article getArticleAuPlusProche(String nomArticle,
+			float latitudeClient, float longitudeClient) throws SQLException {
+		return basketDB.getArticleAuPlusProche(nomArticle, latitudeClient,
+				longitudeClient);
 	}
-	public List<Article> getBasket()
-	{
-		return null;
-		
+
+	public List<Article> getBasket() {
+		return articles;
+		// Partie a re-Commiter si mes modifs sont pas bonnes, JEROME.
+		// return null;
 	}
-	public void removeItem(Article article)
-	{
+
+	public void removeItem(Article article) {
+		if (articles.contains(article)) {
+			articles.remove(article);
+		}
+		// Tout supprimer si mes modifs sont nulles, JEROME.
 	}
-	public void addItem(Article article)
-	{
+
+	public void addItem(Article article) {
+		articles.add(article);
+		// Tout supprimer si mes modifs sont nulles, JEROME.
 	}
-	
-	
 }
