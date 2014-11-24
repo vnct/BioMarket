@@ -48,7 +48,7 @@ public class MainFragment extends Fragment {
 		
 		/* Mise en place de l'autocomplétion dans la barre de recherche **/
 		AutoCompleteTextView autoComplete = (AutoCompleteTextView)rootView.findViewById(R.id.autoCompleteTextView1);
- 
+	
 		/* Instanciation de l'objet permettant de gérer le magasin et les articles **/
 		BasketDB Basket_DAOS = new BasketDB(this.getActivity());
 		Basket_DAOS.open();

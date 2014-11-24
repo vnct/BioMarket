@@ -94,6 +94,8 @@ public class BasketFragment extends Fragment {
 		int position1=-1;
 		ActionMode actionMode;
 		
+
+		
 		// En cas de clic sur un element de la liste
 	    private AdapterView.OnItemClickListener OnItemClickListenerbasket = new AdapterView.OnItemClickListener() {
 	        @Override
@@ -108,6 +110,7 @@ public class BasketFragment extends Fragment {
 	            view.setBackgroundColor(Color.LTGRAY);
 	            changeContextual(view, position);
 	            position1=position;
+	            
 
 	            
 	        }
@@ -117,8 +120,10 @@ public class BasketFragment extends Fragment {
 	        	final View view1= view;
 	    		if(getActivity()!=null)
 	    		{
+	    			
 	    			actionMode = getActivity().startActionMode(new ActionMode.Callback() {
 
+	    				
 						@Override
 						public boolean onCreateActionMode(ActionMode mode,
 								Menu menu) {
@@ -126,6 +131,8 @@ public class BasketFragment extends Fragment {
 				                {
 				                    MenuInflater inflater = mode.getMenuInflater();
 				                    inflater.inflate(R.menu.main_contextual, menu);
+				                    
+				                  
 				                    return true;
 				                }
 				                catch (NullPointerException e)
