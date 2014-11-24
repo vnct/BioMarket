@@ -4,18 +4,18 @@
 
     <item
         android:id="@+id/menu_basket_delete"
-        android:icon="@drawable/ic_action_content_remove"
+        android:icon="@drawable/ic_action_navigation_close"
         android:showAsAction="ifRoom|collapseActionView"
         android:title="@string/basket_delete"/>
 
       <item
         android:id="@+id/menu_basket_up"
-        android:icon="@drawable/ic_action_navigation_collapse"
+        android:icon="@drawable/ic_action_navigation_expand_more"
         android:showAsAction="ifRoom|collapseActionView"
         android:title="@string/basket_up"/>
        <item
         android:id="@+id/menu_basket_down"
-        android:icon="@drawable/ic_action_navigation_expand"
+        android:icon="@drawable/ic_action_navigation_expand_less"
         android:showAsAction="ifRoom|collapseActionView"
         android:title="@string/basket_down"/>
    

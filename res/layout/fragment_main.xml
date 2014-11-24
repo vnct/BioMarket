@@ -34,7 +34,8 @@
                 android:layout_marginTop="30dp"
                 android:ems="10"
                 android:gravity="start"
-                android:hint="@string/fragment_main_hint" >
+                android:hint="@string/fragment_main_hint"
+                android:textColor="@color/primary" >
 
                 <requestFocus />
             </AutoCompleteTextView>
@@ -47,14 +48,15 @@
 
             <Button
                 android:id="@+id/button1"
+                style="@style/AppBaseTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="@string/fragment_main_buy" />
 
-
             <Button
                 android:id="@+id/button2"
+                style="@style/AppBaseTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"

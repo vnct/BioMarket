@@ -5,5 +5,7 @@
      <item android:state_pressed="true" android:drawable="@android:color/transparent" />
       <item android:state_selected="true" android:drawable="@android:color/transparent" />
        <item android:state_checked="true" android:drawable="@android:color/transparent" />
+       
+    
     <item android:drawable="@android:color/transparent" />
 </selector>
