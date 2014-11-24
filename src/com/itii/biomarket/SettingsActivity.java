@@ -45,6 +45,10 @@ public class SettingsActivity extends PreferenceActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setupActionBar();
+		setTheme(R.style.AppSettings);
+		
+		
+		
 		
 	}
 
@@ -56,6 +60,7 @@ public class SettingsActivity extends PreferenceActivity {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			// Show the Up button in the action bar.
 			getActionBar().setDisplayHomeAsUpEnabled(true);
+			
 		}
 	}
 
@@ -83,6 +88,7 @@ public class SettingsActivity extends PreferenceActivity {
 		super.onPostCreate(savedInstanceState);
 
 		setupSimplePreferencesScreen();
+
 	}
 
 
