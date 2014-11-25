@@ -2,9 +2,8 @@ package com.itii.biomarket;
 
 
 import android.app.DialogFragment;
-
 import android.content.Intent;
-
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -12,22 +11,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
-
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.maps.GeoPoint;
 
 public class MapsActivity extends FragmentActivity implements
-NavigationDrawerFragment.NavigationDrawerCallbacks{
+NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChangeListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 	private String parentName = "";
+	private double latitude;
+	private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +88,17 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
+            mMap.setMyLocationEnabled(true);
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
             	mMap.setMyLocationEnabled(true);
+            	 mMap.setOnMyLocationChangeListener(this);
                 setUpMap();
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(44, 5), 4.0f));
-              
+                System.out.println(latitude);
+                System.out.println(longitude);
+               
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(43, 7), 4.0f));
+                
             }
         }
     }
@@ -223,6 +229,17 @@ NavigationDrawerFragment.NavigationDrawerCallbacks{
 			 break;
 		 }
 		return super.onOptionsItemSelected(item);
+	}
+
+
+
+	@Override
+	public void onMyLocationChange(Location arg0) {
+		latitude = arg0.getLatitude();
+		longitude = arg0.getLongitude();
+		System.out.println("latitude " + latitude);
+		System.out.println("longitude " + longitude);
+		
 	}
 
 

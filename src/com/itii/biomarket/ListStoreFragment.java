@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+
+
+import com.google.android.gms.maps.GoogleMap;
+
+import android.location.Location;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.content.Intent;
@@ -28,7 +34,7 @@ import android.widget.ListView;
  * this fragment.
  *
  */
-public class ListStoreFragment extends Fragment {
+public class ListStoreFragment extends Fragment implements GoogleMap.OnMyLocationChangeListener {
 
 
 	public ListStoreFragment() {
@@ -149,5 +155,15 @@ public class ListStoreFragment extends Fragment {
 	}
 	}
 	};
+	private double latitude;
+	private double longitude;
+	@Override
+	public void onMyLocationChange(Location arg0) {
+		latitude = arg0.getLatitude();
+		longitude = arg0.getLongitude();
+		System.out.println("latitude " + latitude);
+		System.out.println("longitude " + longitude);
+		
+	}
 	
 }
