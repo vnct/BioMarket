@@ -23,7 +23,10 @@ public class StoreManagement  {
 		storeDB.open();
 	}
 	
-
+	public List<Commercant> getAllCommercant()
+	{
+		return storeDB.getMagasins();
+	}
 	public Commercant getInfosCommercant(float latitude, float longitude) {
 		return storeDB.getInfosCommercant(latitude, longitude);
 	}

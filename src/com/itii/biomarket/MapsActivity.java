@@ -8,6 +8,7 @@ import java.util.List;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader.ForceLoadContentObserver;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
@@ -177,23 +178,42 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
         		
     			if(articleSearch.length()>0)
     			{
-    				articles = basketManagement.getBasket();
-    				
-    			}
-    			else
-    			{
+    				System.out.println(articleSearch);
     				try {
 						articles = basketManagement.getArticle(articleSearch);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+    				
+    			}
+    			else
+    			{
+    				
+    					articles = basketManagement.getBasket();
+			
     			}
     			
-    			Commercant commercant = storeManagement.findCommercant(articles);
-        		Float latitude = commercant.getLatitude_dg();
-    	        Float longitude = commercant.getLongitude_dg();
-    	        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+    			if(articles!=null)
+    			{
+    				Commercant commercant = storeManagement.findCommercant(articles);
+    				Float latitude = commercant.getLatitude_dg();
+        	        Float longitude = commercant.getLongitude_dg();
+        	        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+    			}
+    			else
+    			{
+    				List<Commercant> commercants = storeManagement.getAllCommercant();
+    				 for(Commercant commercant : commercants)
+    	    	        {
+    	    	        	System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
+    	    	        	Float latitude = commercant.getLatitude_dg();
+    	    	        	Float longitude = commercant.getLongitude_dg();
+    	    	        	mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+    	    	        };
+    			}
+    		
+        		
         		
         	}
     		else

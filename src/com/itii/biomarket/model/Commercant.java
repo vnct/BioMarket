@@ -1,6 +1,6 @@
 package com.itii.biomarket.model;
 
-public class Commercant {
+public class Commercant implements Comparable {
 	private long id;
 	private String nom;
 	private String tel;
@@ -162,6 +162,12 @@ public class Commercant {
 
 	public void setDistanceWithUser(double distanceWithUser) {
 		this.distanceWithUser = distanceWithUser;
+	}
+
+	@Override
+	public int compareTo(Object another) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
