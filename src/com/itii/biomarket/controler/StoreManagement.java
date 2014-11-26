@@ -2,8 +2,10 @@ package com.itii.biomarket.controler;
 
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.itii.biomarket.model.Article;
 import com.itii.biomarket.model.Commercant;
@@ -30,15 +32,58 @@ public class StoreManagement  {
 	}
 	public List<Commercant> orderbyPertinence(List<Article> articles)
 	{
-		return null;
+		Commercant commercant = null;
+		int i = 0;
+		TreeMap<Commercant, Integer> treeMap = new TreeMap<Commercant, Integer>();
+		/*
+		* Trying to get a map with shops associated to the number of
+		* occurrences apparitions
+		*/
+		for (Article article : articles) {
+		commercant = storeDB.getInfosCommercant(article.getLatitude_dg(),
+		article.getLongitude_dg());
+		if (treeMap.containsKey(commercant)) {
+		i = (Integer) treeMap.get(commercant);
+		treeMap.put(commercant, i++);
+		} else {
+		treeMap.put(commercant, 0);
+		}
+		}
+
+		List<Commercant> commercants = new ArrayList<Commercant>();
+		/* Compare while there is some other shop to classify */
+		while (treeMap.size() > 0) {
+
+		/* initialize before Compare */
+		int max = treeMap.get(treeMap.firstKey());
+		Commercant commercantMax = treeMap.firstKey();
+		/* Iterate, compare, and change commercantMax if it's needed */
+		for (Commercant key : treeMap.keySet()) {
+			if (max < treeMap.get(key)) {
+				max = treeMap.get(key);
+				commercantMax = key;
+			}
+		}
+		commercants.add(commercantMax);
+
+		treeMap.remove(commercantMax);
+
+		}
+
+
+		/* Return the list */
+
+		return commercants;
+
+		
 	}
 	public Commercant findCommercant(List<Article> articles)
 	{
-		return null;
+		return orderbyPertinence(articles).get(0);
 	}
 	public List<Commercant> findAllCommercants(List<Article> articles)
 	{
-		return null;
+		return orderbyPertinence(articles);
 	}
 
 
