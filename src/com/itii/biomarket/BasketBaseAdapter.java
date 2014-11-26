@@ -2,6 +2,8 @@ package com.itii.biomarket;
 
 import java.util.List;
 
+import com.itii.biomarket.model.Article;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +15,17 @@ public class BasketBaseAdapter extends BaseAdapter{
 
 	private LayoutInflater mInflater;
     private Context mContext;
-    List<String> mybasketList;
+    List<Article> mybasketList;
     
     
 
-    public List<String> getBasketList() {
+    public List<Article> getBasketList() {
 		return mybasketList;
 	}
-	public void setBasketList(List<String> basketList) {
+	public void setBasketList(List<Article> basketList) {
 		this.mybasketList = basketList;
 	}
-	public BasketBaseAdapter(Context context, List<String> basketList){
+	public BasketBaseAdapter(Context context, List<Article> basketList){
         mContext = context;
         mybasketList = basketList;
         mInflater = LayoutInflater.from(mContext);
@@ -56,8 +58,8 @@ public class BasketBaseAdapter extends BaseAdapter{
 	        }
 	        TextView textViewQuantity = (TextView) vue.findViewById(R.id.textViewBasketQuantity);
 	        TextView textViewName = (TextView) vue.findViewById(R.id.textViewBasketName);
-	        textViewName.setText(mybasketList.get(position));
-	        textViewQuantity.setText(mybasketList.get(position));
+	        textViewName.setText(mybasketList.get(position).getNom());
+	        textViewQuantity.setText(mybasketList.get(position).getCategorie());
 	       
 
 	        return vue;

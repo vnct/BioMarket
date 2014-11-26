@@ -16,17 +16,28 @@ import java.util.List;
 
 
 
+
+
+
+
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.itii.biomarket.controler.BasketManagement;
+import com.itii.biomarket.controler.StoreManagement;
+import com.itii.biomarket.model.Article;
+import com.itii.biomarket.model.Commercant;
 
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.ActionMode;
@@ -49,6 +60,8 @@ import android.widget.ListView;
  */
 public class ListStoreFragment extends Fragment implements LocationListener	{
 
+	
+	private List<Commercant> listCommercant;
 	public ListStoreFragment() {
 	}
 	private StoreBaseAdapter storeBaseAdapter = null;
@@ -59,37 +72,60 @@ public class ListStoreFragment extends Fragment implements LocationListener	{
 		View rootView = inflater.inflate(R.layout.fragment_list_store,
 				container, false);
 		
-		List<String> toto = new ArrayList<String>();
-        toto.add("List 1");
-        toto.add("List 2");
-        toto.add("List 3");
-        ListView listViewstore = (ListView)rootView.findViewById(R.id.listViewStore);
-        storeBaseAdapter = new StoreBaseAdapter(getActivity(),toto);
-        listViewstore.setAdapter(storeBaseAdapter);
-        listViewstore.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-    	listViewstore.setOnItemClickListener(OnItemClickListenerViewstore);
+		LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+		Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+		StoreManagement storeManagement = new StoreManagement(getActivity());
+		BasketManagement basketManagement = new BasketManagement(getActivity());
+		
+		List<Article> articles = basketManagement.getBasket();
+		if(articles!=null)
+		{
+			listCommercant = storeManagement.orderbyPertinence(articles);
+		}
+		else
+		{
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+	    	Integer distance_max = prefs.getInt("seekBar", 50);
+	    	listCommercant= storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
+	        
+			
+		}
+		
+		
+		if(listCommercant!=null)
+		{
+			
+			ListView listViewstore = (ListView)rootView.findViewById(R.id.listViewStore);
+	        storeBaseAdapter = new StoreBaseAdapter(getActivity(),listCommercant);
+	        listViewstore.setAdapter(storeBaseAdapter);
+	        listViewstore.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+	    	listViewstore.setOnItemClickListener(OnItemClickListenerViewstore);
+		}
+		
+       
+        
+       
 		return rootView;
 	}
 	ActionMode actionMode;
 	  int position1=-1;
 	  
+	
+	  
 	  @Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-		Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+		
+		
 		  if(actionMode!=null)
 	        {
 	            actionMode.finish();
 	        }
 	}
 	  
-	  @Override
-	  public void onPause() {
-		  
-	  };
+	
 	 
 	  @Override
 	    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -108,7 +144,7 @@ public class ListStoreFragment extends Fragment implements LocationListener	{
 
             if(position1==position)
             {
-            	System.out.println(actionMode.toString());
+            //	System.out.println(actionMode.toString());
                 actionMode.finish();
             }
             view.setBackgroundColor(Color.LTGRAY);
@@ -152,9 +188,13 @@ public class ListStoreFragment extends Fragment implements LocationListener	{
 				  switch (item.getItemId()) {
                   case R.id.menu_store_maps:
                 	  	Intent i;
-                	  	String store = (String) storeBaseAdapter.getItem(position);
+                	  	Commercant store = (Commercant) storeBaseAdapter.getItem(position);
                 	  	// TODO PASSER LES PARAMETRES
                 	  	i = new Intent(getActivity().getApplicationContext(), MapsActivity.class);
+                	  	i.putExtra("NAME", store.getNom());
+                	  	i.putExtra("LONGITUDE", store.getLongitude_dg());
+                	  	i.putExtra("LATITUDE", store.getLatitude_dg());
+                	  	i.putExtra("PARENTNAME","Store");
 	          	        startActivity(i);
 	          	        getActivity().finish();
                 	  return true;
@@ -181,8 +221,7 @@ public class ListStoreFragment extends Fragment implements LocationListener	{
 	public void onLocationChanged(Location location) {
 		latitude = location.getLatitude();
 		longitude = location.getLongitude();
-		System.out.println("latitude " + latitude);
-		System.out.println("longitude " + longitude);
+	
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package com.itii.biomarket;
 
 
+import com.itii.biomarket.controler.BasketManagement;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -197,7 +199,9 @@ public class MainActivity extends Activity implements
 	        startActivityForResult(i, 1);		
 			break;
 		case R.id.menu_basket_discard:
-			// TODO : Supprimer Panier + POP UP
+			BasketManagement basketManagement = new BasketManagement(getApplicationContext());
+			basketManagement.removeBasket();
+			mViewPager.setCurrentItem(0);
 			break;
 		case R.id.action_settings:
 			i = new Intent(getApplicationContext(), SettingsActivity.class);

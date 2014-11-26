@@ -5,10 +5,12 @@ package com.itii.biomarket;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.itii.biomarket.controler.BasketManagement;
+import com.itii.biomarket.model.Article;
+
 import android.os.Bundle;
 import android.app.Fragment;
 import android.graphics.Color;
-
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,7 +38,7 @@ public class BasketFragment extends Fragment {
 		private static final String ARG_SECTION_NUMBER = "section_number";
 
 		private BasketBaseAdapter basketBaseAdapter = null; 
-		private List<String> toto = new ArrayList<String>();
+		private List<Article> articles = new ArrayList<Article>();
 
 		private ListView listViewbasket;
 		/**
@@ -76,17 +78,18 @@ public class BasketFragment extends Fragment {
 			View rootView = inflater.inflate(R.layout.fragment_basket,
 					container, false);
 			
-			
-			 
-		        toto.add("basket 1");
-		        toto.add("basket 2");
-		        toto.add("basket 3");
+			BasketManagement basketManagement = new BasketManagement(getActivity());
+			 List<Article> articles = basketManagement.getBasket();
+		      if(articles!=null)
+		      {
+		    	  listViewbasket = (ListView)rootView.findViewById(R.id.listViewbasket);
+			        basketBaseAdapter = new BasketBaseAdapter(getActivity(),articles);
+			        listViewbasket.setAdapter(basketBaseAdapter);
+			        listViewbasket.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+			        listViewbasket.setOnItemClickListener(OnItemClickListenerbasket);
+		      }
 		        //listViewstore = (ListView)findViewById(R.id.listViewStore);
-		        listViewbasket = (ListView)rootView.findViewById(R.id.listViewbasket);
-		        basketBaseAdapter = new BasketBaseAdapter(getActivity(),toto);
-		        listViewbasket.setAdapter(basketBaseAdapter);
-		        listViewbasket.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		        listViewbasket.setOnItemClickListener(OnItemClickListenerbasket);
+		        
 			
 			return rootView;
 		}
@@ -159,9 +162,9 @@ public class BasketFragment extends Fragment {
 									
 									return true;
 							 case R.id.menu_basket_delete:
-								 String basket_item = (String) basketBaseAdapter.getItem(position);
-								 toto.remove(basket_item);
-								 basketBaseAdapter = new BasketBaseAdapter(getActivity(),toto);
+								 Article basket_item = (Article) basketBaseAdapter.getItem(position);
+								 articles.remove(basket_item);
+								 basketBaseAdapter = new BasketBaseAdapter(getActivity(),articles);
 								 listViewbasket.setAdapter(basketBaseAdapter);
 								 listViewbasket.setOnItemClickListener(OnItemClickListenerbasket);
 			                        actionMode.finish();

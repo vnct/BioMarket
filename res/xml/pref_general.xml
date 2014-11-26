@@ -34,7 +34,7 @@
         
        <SeekBarPreference
   			 android:defaultValue="50"
-  			 android:max="200"
+  			 android:max="300"
   		
    				android:title="@string/pref_distance"
    				android:key="seekBar">

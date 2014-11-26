@@ -1,17 +1,23 @@
 package com.itii.biomarket;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.itii.biomarket.controler.BasketManagement;
 import com.itii.biomarket.model.Article;
 import com.itii.biomarket.model.BasketDB;
 
@@ -29,6 +35,11 @@ public class MainFragment extends Fragment {
 	 * fragment.
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
+	private Button addButton;
+	private Button buyButton;
+	private AutoCompleteTextView autoComplete;
+	private    List<Article> articleList = new ArrayList<Article>();
+	
 	
 	public static  MainFragment newInstance(int sectionNumber) {
 		MainFragment fragment = new MainFragment();
@@ -47,25 +58,31 @@ public class MainFragment extends Fragment {
 				false);
 		
 		/* Mise en place de l'autocomplétion dans la barre de recherche **/
-		AutoCompleteTextView autoComplete = (AutoCompleteTextView)rootView.findViewById(R.id.autoCompleteTextView1);
+		autoComplete = (AutoCompleteTextView)rootView.findViewById(R.id.autoCompleteTextView1);
+		addButton = (Button) rootView.findViewById(R.id.button2);
+	
+		buyButton = (Button) rootView.findViewById(R.id.button1);
+		
+		addButton.setOnClickListener(clickAdd());
+		buyButton.setOnClickListener(clickBuy());
 	
 		/* Instanciation de l'objet permettant de gérer le magasin et les articles **/
-		BasketDB Basket_DAOS = new BasketDB(this.getActivity());
-		Basket_DAOS.open();
+		BasketManagement basketManagement = new BasketManagement(getActivity());
+	
 
         /* Déclaration d'une liste d'objet Article **/
-        List<Article> ArticleGet;
+     
 		try {
-			ArticleGet = Basket_DAOS.getArticles();
+			articleList = basketManagement.getArticles();
 		
         /* Déclaration d'un tableau de String de la taille de la liste précédente **/
-        String[] autoCompletString = new String[ArticleGet.size()];
+        String[] autoCompletString = new String[articleList.size()];
         
         /* Récupération des noms des articles de la liste pou les mettre dans le tableau de String  **/
-        if(ArticleGet != null) {
+        if(articleList != null) {
         	int i = 0;
         	
-			for(Article m : ArticleGet)
+			for(Article m : articleList)
 			{
 				autoCompletString[i] = m.getNom();
 				i++;
@@ -83,6 +100,45 @@ public class MainFragment extends Fragment {
 		}
 		return rootView;
 	}
+
+
+	
+	
+	private OnClickListener clickBuy() {
+		
+		return null;
+	}
+
+
+	private OnClickListener clickAdd() {
+		System.out.println("toto");
+		BasketManagement basketManagement = new BasketManagement(getActivity());
+		Editable name = autoComplete.getText();
+		Article articletoAdd = null;
+		Boolean bool = false;
+		for(Article article : articleList)
+		{
+			if(article.getNom().equals(name))
+			{
+				articletoAdd = article;
+				bool = true;
+			}
+		}
+		if(bool==false)
+		{
+			Toast.makeText(getActivity(), R.string.fragment_main_toast, 100);
+		}
+		else
+		{
+			System.out.println("add");
+			//basketManagement.addItem(Article);
+			
+		}
+		
+	
+		return null;
+	}
+
 
 	@Override
 	public void onAttach(Activity activity) {

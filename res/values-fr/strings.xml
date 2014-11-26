@@ -40,5 +40,5 @@
     <string name="trouver_le_plus_proche">Trouver le plus proche</string>
       <string name="fragment_main_buy">Acheter</string>
        <string name="fragment_main_hint">Entrez un article à rechercher</string>
-
+  <string name="fragment_main_toast">Cet article n\'existe pas</string>
 </resources>

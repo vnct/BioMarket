@@ -48,4 +48,11 @@ public class BasketManagement {
 		articles.add(article);
 		// Tout supprimer si mes modifs sont nulles, JEROME.
 	}
+	public void removeBasket() {
+		
+		
+	}
+	public void addItem(String nomArticle) {
+		
+	}
 }

@@ -2,6 +2,8 @@ package com.itii.biomarket;
 
 import java.util.List;
 
+import com.itii.biomarket.model.Commercant;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +15,19 @@ public class StoreBaseAdapter extends BaseAdapter{
 
 	 private LayoutInflater mInflater;
 	 private Context mContext;
-	 List<String> myStoreList;
+	 List<Commercant> myStoreList;
 	    
-    public List<String> getMyStoreList() {
+    public List<Commercant> getMyStoreList() {
 		return myStoreList;
 	}
 
 
-	public void setMyStoreList(List<String> myStoreList) {
+	public void setMyStoreList(List<Commercant> myStoreList) {
 		this.myStoreList = myStoreList;
 	}
 
 
-	public StoreBaseAdapter(Context context, List<String> storeList){
+	public StoreBaseAdapter(Context context, List<Commercant> storeList){
 		myStoreList = storeList;
 		mContext = context;
         mInflater = LayoutInflater.from(mContext);
@@ -63,9 +65,10 @@ public class StoreBaseAdapter extends BaseAdapter{
 	        TextView textViewName = (TextView) vue.findViewById(R.id.textViewStoreName);
 	        TextView textViewCompatibility = (TextView) vue.findViewById(R.id.textViewStoreCompatibility);
 	        TextView textViewPosition = (TextView) vue.findViewById(R.id.textViewStorePosition);
-	        textViewName.setText(myStoreList.get(position));
-	        textViewCompatibility.setText(myStoreList.get(position)); 
-	        textViewPosition.setText(myStoreList.get(position));
+	        textViewName.setText(myStoreList.get(position).getNom());
+	        textViewCompatibility.setText(""); 
+	      
+	        textViewPosition.setText(String.valueOf(myStoreList.get(position).getDistanceWithUser()));
 	        return vue;
 	}
 

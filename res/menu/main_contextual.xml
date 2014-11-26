@@ -12,11 +12,13 @@
         android:id="@+id/menu_basket_up"
         android:icon="@drawable/ic_action_navigation_expand_more"
         android:showAsAction="ifRoom|collapseActionView"
-        android:title="@string/basket_up"/>
+        android:title="@string/basket_up"
+        android:visible="false"/>
        <item
         android:id="@+id/menu_basket_down"
         android:icon="@drawable/ic_action_navigation_expand_less"
         android:showAsAction="ifRoom|collapseActionView"
-        android:title="@string/basket_down"/>
+        android:title="@string/basket_down"
+         android:visible="false"/>
    
 </menu>
