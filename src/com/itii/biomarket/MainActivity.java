@@ -196,6 +196,7 @@ public class MainActivity extends Activity implements
 			i = new Intent(getApplicationContext(), MapsActivity.class);
 		    i.putExtra("PARENTNAME","Home");
 		    i.putExtra("BASKET", true); // on spécifie qu'on va chercher le contenu du basket
+		    i.putExtra("ARTICLE", "");
 	        startActivityForResult(i, 1);		
 			break;
 		case R.id.menu_basket_discard:

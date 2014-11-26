@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -63,8 +64,35 @@ public class MainFragment extends Fragment {
 	
 		buyButton = (Button) rootView.findViewById(R.id.button1);
 		
-		addButton.setOnClickListener(clickAdd());
-		buyButton.setOnClickListener(clickBuy());
+		addButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				BasketManagement basketManagement = new BasketManagement(getActivity());
+				
+				try {
+					basketManagement.addItem(autoComplete.getText().toString().toLowerCase());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		buyButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i;
+				 i = new Intent(getActivity(), MapsActivity.class);
+				 i.putExtra("PARENTNAME","Home");
+				 i.putExtra("BASKET", true);
+				 i.putExtra("ARTICLE", autoComplete.getText().toString().toLowerCase());
+			     startActivityForResult(i, 1);
+				
+			}
+		});
 	
 		/* Instanciation de l'objet permettant de gérer le magasin et les articles **/
 		BasketManagement basketManagement = new BasketManagement(getActivity());
@@ -110,34 +138,7 @@ public class MainFragment extends Fragment {
 	}
 
 
-	private OnClickListener clickAdd() {
-		System.out.println("toto");
-		BasketManagement basketManagement = new BasketManagement(getActivity());
-		Editable name = autoComplete.getText();
-		Article articletoAdd = null;
-		Boolean bool = false;
-		for(Article article : articleList)
-		{
-			if(article.getNom().equals(name))
-			{
-				articletoAdd = article;
-				bool = true;
-			}
-		}
-		if(bool==false)
-		{
-			Toast.makeText(getActivity(), R.string.fragment_main_toast, 100);
-		}
-		else
-		{
-			System.out.println("add");
-			//basketManagement.addItem(Article);
-			
-		}
-		
-	
-		return null;
-	}
+
 
 
 	@Override

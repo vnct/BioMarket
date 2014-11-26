@@ -36,6 +36,10 @@ public class StoreManagement  {
 	{
 		return null;
 	}
+	public List<Commercant> findAllCommercants(List<Article> articles)
+	{
+		return null;
+	}
 
 
 }

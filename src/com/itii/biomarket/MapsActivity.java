@@ -1,6 +1,8 @@
 package com.itii.biomarket;
 
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.DialogFragment;
@@ -29,7 +31,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.maps.GeoPoint;
+import com.itii.biomarket.controler.BasketManagement;
 import com.itii.biomarket.controler.StoreManagement;
+import com.itii.biomarket.model.Article;
 import com.itii.biomarket.model.Commercant;
 
 public class MapsActivity extends FragmentActivity implements
@@ -43,11 +47,13 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 	private Float storeLongitude;
 	private Float storeLatitude;
 	private boolean basketSearch;
+	private String articleSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        basketSearch = false;
         try
 		{
         	parentName = getIntent().getExtras().getString("PARENTNAME");
@@ -60,6 +66,10 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
         	if(parentName.equals("Home"))
         	{
         		basketSearch = getIntent().getExtras().getBoolean("BASKET");
+        		if(basketSearch==true)
+        		{
+        			articleSearch = getIntent().getExtras().getString("ARTICLE");
+        		}
      
         	}
         	
@@ -157,25 +167,56 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
     private void setUpMap() {
    	
     	// TODO RECUPERER LES STORES AVEC LEURS NOMS
-    	if(parentName.equals("List"))
+    	if(parentName.equals("List")||parentName.equals("Home"))
     	{
-    	
-	    	StoreManagement storeManagement = new StoreManagement(getApplicationContext());
-	    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-	    	Integer distance_max = prefs.getInt("seekBar", 50);
-	    	List<Commercant> list= storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
-	        for(Commercant commercant : list)
-	        {
-	        	System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
-	        	Float latitude = commercant.getLatitude_dg();
-	        	Float longitude = commercant.getLongitude_dg();
-	        	mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
-	        };
+    		if(basketSearch==true)
+        	{
+    			StoreManagement storeManagement = new StoreManagement(getApplicationContext());
+        		BasketManagement basketManagement = new BasketManagement(getApplicationContext());
+        		List<Article> articles = new ArrayList<Article>();
+        		
+    			if(articleSearch.length()>0)
+    			{
+    				articles = basketManagement.getBasket();
+    				
+    			}
+    			else
+    			{
+    				try {
+						articles = basketManagement.getArticle(articleSearch);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+    			}
+    			
+    			Commercant commercant = storeManagement.findCommercant(articles);
+        		Float latitude = commercant.getLatitude_dg();
+    	        Float longitude = commercant.getLongitude_dg();
+    	        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+        		
+        	}
+    		else
+	    	{
+    			StoreManagement storeManagement = new StoreManagement(getApplicationContext());
+    			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    	    	Integer distance_max = prefs.getInt("seekBar", 50);
+    	    	List<Commercant> list= storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
+    	        for(Commercant commercant : list)
+    	        {
+    	        	System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
+    	        	Float latitude = commercant.getLatitude_dg();
+    	        	Float longitude = commercant.getLongitude_dg();
+    	        	mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+    	        };
+	    	}
+	    	
     	}
     	if(parentName.equals("Store"))
     	{
     		 mMap.addMarker(new MarkerOptions().position(new LatLng(storeLatitude, storeLongitude)).title(storeName));
     	}
+    	
   //      mMap.addMarker(new MarkerOptions().position(new LatLng(43.6, 7.1)).title("toto"));
         
         mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
