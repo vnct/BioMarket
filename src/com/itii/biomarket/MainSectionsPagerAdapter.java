@@ -74,5 +74,9 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 		}
 		return "";
 	}
+	@Override
+	public int getItemPosition(Object object) {
+	    return POSITION_NONE;
+	}
 
 }

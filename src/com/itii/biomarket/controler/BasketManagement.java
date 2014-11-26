@@ -1,6 +1,7 @@
 package com.itii.biomarket.controler;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.itii.biomarket.model.Article;
@@ -15,6 +16,7 @@ public class BasketManagement {
 	public BasketManagement(Context pContext) {
 		basketDB = new BasketDB(pContext);
 		basketDB.open();
+		articles = new ArrayList<Article>();
 	}
 
 	public List<Article> getArticles() throws SQLException {
@@ -32,6 +34,7 @@ public class BasketManagement {
 	}
 
 	public List<Article> getBasket() {
+		System.out.println(articles.size());
 		return articles;
 		// Partie a re-Commiter si mes modifs sont pas bonnes, JEROME.
 		// return null;
@@ -50,9 +53,16 @@ public class BasketManagement {
 	}
 	public void removeBasket() {
 		
-		
+		articles.clear();
 	}
 	public void addItem(String nomArticle) {
-		
+		System.out.println("ADD");
+	
+		try {
+			articles.add(getArticle(nomArticle).get(0));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

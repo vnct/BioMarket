@@ -173,14 +173,15 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
     		if(basketSearch==true)
         	{
     			StoreManagement storeManagement = new StoreManagement(getApplicationContext());
-        		BasketManagement basketManagement = new BasketManagement(getApplicationContext());
+        	//	BasketManagement basketManagement = new BasketManagement(getApplicationContext());
+        		
         		List<Article> articles = new ArrayList<Article>();
         		
     			if(articleSearch.length()>0)
     			{
     				System.out.println(articleSearch);
     				try {
-						articles = basketManagement.getArticle(articleSearch);
+						articles = MainActivity.basketManagement.getArticle(articleSearch);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -190,7 +191,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
     			else
     			{
     				
-    					articles = basketManagement.getBasket();
+    					articles = MainActivity.basketManagement.getBasket();
 			
     			}
     			

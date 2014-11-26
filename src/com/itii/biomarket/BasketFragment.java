@@ -78,12 +78,13 @@ public class BasketFragment extends Fragment {
 			View rootView = inflater.inflate(R.layout.fragment_basket,
 					container, false);
 			
-			BasketManagement basketManagement = new BasketManagement(getActivity());
-			 List<Article> articles = basketManagement.getBasket();
+			//BasketManagement basketManagement = new BasketManagement(getActivity());
+			 List<Article> articles = MainActivity.basketManagement.getBasket();
+			 //System.out.println("Articles size "  +articles.size());
 		      if(articles!=null)
 		      {
 		    	  listViewbasket = (ListView)rootView.findViewById(R.id.listViewbasket);
-			        basketBaseAdapter = new BasketBaseAdapter(getActivity(),articles);
+			        basketBaseAdapter = new BasketBaseAdapter(getActivity(),MainActivity.basketManagement.getBasket());
 			        listViewbasket.setAdapter(basketBaseAdapter);
 			        listViewbasket.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 			        listViewbasket.setOnItemClickListener(OnItemClickListenerbasket);
@@ -163,8 +164,10 @@ public class BasketFragment extends Fragment {
 									return true;
 							 case R.id.menu_basket_delete:
 								 Article basket_item = (Article) basketBaseAdapter.getItem(position);
-								 articles.remove(basket_item);
-								 basketBaseAdapter = new BasketBaseAdapter(getActivity(),articles);
+								 System.out.println(articles.size());
+								 //articles.remove(basket_item);
+								 MainActivity.basketManagement.removeItem(basket_item);
+								 basketBaseAdapter = new BasketBaseAdapter(getActivity(),MainActivity.basketManagement.getBasket());
 								 listViewbasket.setAdapter(basketBaseAdapter);
 								 listViewbasket.setOnItemClickListener(OnItemClickListenerbasket);
 			                        actionMode.finish();

@@ -21,6 +21,7 @@ import java.util.List;
 
 
 
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -76,9 +77,9 @@ public class ListStoreFragment extends Fragment implements LocationListener	{
 		Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 		StoreManagement storeManagement = new StoreManagement(getActivity());
-		BasketManagement basketManagement = new BasketManagement(getActivity());
+		//BasketManagement basketManagement = new BasketManagement(getActivity());
 		
-		List<Article> articles = basketManagement.getBasket();
+		List<Article> articles = MainActivity.basketManagement.getBasket();
 		if(articles!=null)
 		{
 			listCommercant = storeManagement.orderbyPertinence(articles);

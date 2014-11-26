@@ -69,10 +69,13 @@ public class MainFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				
-				BasketManagement basketManagement = new BasketManagement(getActivity());
+				//BasketManagement basketManagement = new BasketManagement(getActivity());
 				
 				try {
-					basketManagement.addItem(autoComplete.getText().toString().toLowerCase());
+					//basketManagement.addItem(autoComplete.getText().toString().toLowerCase());
+					MainActivity.basketManagement.addItem(autoComplete.getText().toString().toLowerCase());
+					
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -95,13 +98,13 @@ public class MainFragment extends Fragment {
 		});
 	
 		/* Instanciation de l'objet permettant de gérer le magasin et les articles **/
-		BasketManagement basketManagement = new BasketManagement(getActivity());
+		//BasketManagement basketManagement = new BasketManagement(getActivity());
 	
 
         /* Déclaration d'une liste d'objet Article **/
      
 		try {
-			articleList = basketManagement.getArticles();
+			articleList = MainActivity.basketManagement.getArticles();
 		
         /* Déclaration d'un tableau de String de la taille de la liste précédente **/
         String[] autoCompletString = new String[articleList.size()];

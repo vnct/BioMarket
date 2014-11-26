@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 
@@ -22,6 +23,7 @@ public class MainActivity extends Activity implements
 	 * navigation drawer.
 	 */
 	public static Integer page=0;
+	public static BasketManagement basketManagement = null;
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -68,7 +70,10 @@ public class MainActivity extends Activity implements
 		mViewPager.setOnPageChangeListener(this);
 		
 		
-		 
+		if(basketManagement==null)
+			{
+			basketManagement= new BasketManagement(getApplicationContext());
+			}
 		
 		Log.println(Log.INFO, "MainActivity", "onCreate");
 
@@ -200,7 +205,7 @@ public class MainActivity extends Activity implements
 	        startActivityForResult(i, 1);		
 			break;
 		case R.id.menu_basket_discard:
-			BasketManagement basketManagement = new BasketManagement(getApplicationContext());
+			//BasketManagement basketManagement = new BasketManagement(getApplicationContext());
 			basketManagement.removeBasket();
 			mViewPager.setCurrentItem(0);
 			break;
@@ -219,13 +224,14 @@ public class MainActivity extends Activity implements
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		// TODO Auto-generated method stub
 		
+	
+	//	mViewPager.
 	}
 
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -233,6 +239,10 @@ public class MainActivity extends Activity implements
 	public void onPageSelected(int arg0) {
 		mViewPager = (ViewPager) findViewById(R.id.main_pager);
 		mTitle = mViewPager.getAdapter().getPageTitle(arg0);
+		//mViewPager.setAdapter(mSectionsPagerAdapter);
+		//mViewPager.setCurrentItem(arg0);
+		
+		mSectionsPagerAdapter.notifyDataSetChanged();
 		Log.println(Log.INFO, "MainActivity", "onPageSelected " + mTitle);
 		
 		
