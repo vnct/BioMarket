@@ -16,7 +16,7 @@ import android.database.Cursor;
 import android.util.Log;
 
 public class StoreManagement  {	
-	
+	private List<Commercant> commercants = null;
 	private StoreDB storeDB = null;
 	public StoreManagement(Context pContext) {
 		storeDB = new StoreDB(pContext);
@@ -50,7 +50,7 @@ public class StoreManagement  {
 		}
 		}
 
-		List<Commercant> commercants = new ArrayList<Commercant>();
+		commercants = new ArrayList<Commercant>();
 		/* Compare while there is some other shop to classify */
 		while (treeMap.size() > 0) {
 
