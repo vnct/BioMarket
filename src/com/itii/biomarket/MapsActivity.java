@@ -1,9 +1,13 @@
 package com.itii.biomarket;
 
 
+import java.util.List;
+
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -11,6 +15,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,15 +27,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.maps.GeoPoint;
+import com.itii.biomarket.controler.StoreManagement;
+import com.itii.biomarket.model.Commercant;
 
 public class MapsActivity extends FragmentActivity implements
-NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChangeListener{
+NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChangeListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 	private String parentName = "";
-	private double latitude;
-	private double longitude;
+	private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +58,24 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 				.findFragmentById(R.id.navigation_drawer);
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
-        setUpMapIfNeeded();
-    }
+	
+    	
+    	LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
+		location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
+		
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+ 
+       
+    }
+    @Override
+	  public void onStop() {
+		super.onStop();
+	  };
+	  
     @Override
     protected void onResume() {
         super.onResume();
@@ -83,26 +106,30 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
      */
     
     private void setUpMapIfNeeded() {
+    	
+    	
+	    
+
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             mMap.setMyLocationEnabled(true);
+            
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
             	mMap.setMyLocationEnabled(true);
             	 mMap.setOnMyLocationChangeListener(this);
-                setUpMap();
-                System.out.println(latitude);
-                System.out.println(longitude);
-               
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(43, 7), 4.0f));
+          
+            	 setUpMap();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(43, 7), 6.0f));
                 
             }
         }
     }
 
+   
     /**
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
      * just add a marker near Africa.
@@ -112,7 +139,18 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
     private void setUpMap() {
    	
     	// TODO RECUPERER LES STORES AVEC LEURS NOMS
-        mMap.addMarker(new MarkerOptions().position(new LatLng(40, 0)).title("Marker"));
+
+    	StoreManagement storeManagement = new StoreManagement(getApplicationContext());
+    	List<Commercant> list= storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float) 200000.0);
+        for(Commercant commercant : list)
+        {
+        	System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
+        	Float latitude = commercant.getLatitude_dg();
+        	Float longitude = commercant.getLongitude_dg();
+        	mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+        };
+  //      mMap.addMarker(new MarkerOptions().position(new LatLng(43.6, 7.1)).title("toto"));
+        
         mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 			
         	// En cas de clic sur un market
@@ -235,12 +273,10 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 
 	@Override
 	public void onMyLocationChange(Location arg0) {
-		latitude = arg0.getLatitude();
-		longitude = arg0.getLongitude();
-		System.out.println("latitude " + latitude);
-		System.out.println("longitude " + longitude);
-		
+		location = arg0;
 	}
+
+
 
 
 

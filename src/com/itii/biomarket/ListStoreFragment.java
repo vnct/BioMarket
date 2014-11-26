@@ -8,11 +8,24 @@ import java.util.List;
 
 
 
+
+
+
+
+
+
+
+
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.LocationSource;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
@@ -34,8 +47,7 @@ import android.widget.ListView;
  * this fragment.
  *
  */
-public class ListStoreFragment extends Fragment implements GoogleMap.OnMyLocationChangeListener {
-
+public class ListStoreFragment extends Fragment implements LocationListener	{
 
 	public ListStoreFragment() {
 	}
@@ -46,9 +58,7 @@ public class ListStoreFragment extends Fragment implements GoogleMap.OnMyLocatio
 		setHasOptionsMenu(true);
 		View rootView = inflater.inflate(R.layout.fragment_list_store,
 				container, false);
-
-	
-	
+		
 		List<String> toto = new ArrayList<String>();
         toto.add("List 1");
         toto.add("List 2");
@@ -67,11 +77,19 @@ public class ListStoreFragment extends Fragment implements GoogleMap.OnMyLocatio
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+		Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 		  if(actionMode!=null)
 	        {
 	            actionMode.finish();
 	        }
 	}
+	  
+	  @Override
+	  public void onPause() {
+		  
+	  };
 	 
 	  @Override
 	    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -157,13 +175,36 @@ public class ListStoreFragment extends Fragment implements GoogleMap.OnMyLocatio
 	};
 	private double latitude;
 	private double longitude;
+	
+
 	@Override
-	public void onMyLocationChange(Location arg0) {
-		latitude = arg0.getLatitude();
-		longitude = arg0.getLongitude();
+	public void onLocationChanged(Location location) {
+		latitude = location.getLatitude();
+		longitude = location.getLongitude();
 		System.out.println("latitude " + latitude);
 		System.out.println("longitude " + longitude);
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	
 	
 }

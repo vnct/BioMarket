@@ -53,7 +53,7 @@ public abstract class DAOBase {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double d = R * c;
         
-        Log.d("Calcul distance", "entre " + x1 + ", " + y1 + " et " + x2 + "," + y2 +" => " + d);
+      //  Log.d("Calcul distance", "entre " + x1 + ", " + y1 + " et " + x2 + "," + y2 +" => " + d);
 
         return d;
     }
