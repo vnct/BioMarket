@@ -145,7 +145,7 @@ public class NavigationDrawerFragment extends Fragment {
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeButtonEnabled(true);
-		actionBar.setIcon(R.drawable.ic_action_navigation_menu);
+		actionBar.setIcon(R.drawable.ic_launcher);
 
 		// ActionBarDrawerToggle ties together the the proper interactions
 		// between the navigation drawer and the action bar app icon.

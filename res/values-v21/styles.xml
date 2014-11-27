@@ -1,9 +1,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
- 
-    <style name="AppBaseTheme" parent="android:Theme.Material.Light">
-	       <!-- Main theme colors -->
-	    <!--   your app branding color for the app bar -->
+   <style name="AppTheme" parent="AppBaseTheme">
+         <!--   your app branding color for the app bar -->
 	    <item name="android:colorPrimary">@color/primary</item>
 	    <!--   darker variant for the status bar and contextual app bars -->
 	    <item name="android:colorPrimaryDark">@color/primary_dark</item>
@@ -22,7 +20,12 @@
 	    	     
     </style>
     
-    <style name="AppSettings" parent="AppBaseTheme">
+    <style name="AppBaseTheme" parent="android:Theme.Material.Light">
+	       <!-- Main theme colors -->
+	   
+    </style>
+    
+    <style name="AppSettings" parent="AppTheme">
         
          <item name="android:actionModeCloseDrawable">@drawable/ic_action_navigation_arrow_back_white</item>
           <item name="android:homeAsUpIndicator">@drawable/ic_action_navigation_arrow_back_white</item>
