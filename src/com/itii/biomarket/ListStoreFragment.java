@@ -80,15 +80,28 @@ public class ListStoreFragment extends Fragment implements LocationListener	{
 		//BasketManagement basketManagement = new BasketManagement(getActivity());
 		
 		List<Article> articles = MainActivity.basketManagement.getBasket();
-		if(articles!=null)
+		System.out.println("articles " + articles);
+		System.out.println("articles " + articles.size());
+	
+		if((articles!=null)&&(articles.size()>0))
 		{
+		//Log.d("ARTCILES", articles.toString());
 			listCommercant = storeManagement.orderbyPertinence(articles);
 		}
 		else
 		{
+			
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		
 	    	Integer distance_max = prefs.getInt("seekBar", 50);
-	    	listCommercant= storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
+	    	try
+	    	{
+	    		listCommercant= storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		listCommercant = storeManagement.getAllCommercant();
+	    	}
 	        
 			
 		}

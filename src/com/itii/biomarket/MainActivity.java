@@ -5,7 +5,10 @@ import com.itii.biomarket.controler.BasketManagement;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -45,6 +48,9 @@ public class MainActivity extends Activity implements
 	 */
 	private CharSequence mTitle;
 	private int itemCurrent;
+	 private SensorManager mSensorManager;
+	    private Sensor mAccelerometer;
+	    private ShakeDetector mShakeDetector;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +83,44 @@ public class MainActivity extends Activity implements
 		
 		Log.println(Log.INFO, "MainActivity", "onCreate");
 
+		 mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+	        mAccelerometer = mSensorManager
+	                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+	        mShakeDetector = new ShakeDetector();
+	        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
+	            @Override
+	            public void onShake(int count) {
+	                /*
+	                 * The following method, "handleShakeEvent(count):" is a stub //
+	                 * method you would use to setup whatever you want done once the
+	                 * device has been shook.
+	                 */
+	            	System.out.println("TOTO count");
+	                             handleShakeEvent(count);
+	            }
+	        });
 		
 		
 				
 
 	}
+	  public void onPause()
+	    {
+
+	        mSensorManager.unregisterListener(mShakeDetector);
+	        super.onPause();
+	        //    System.out.println("------------- MainActivity - onPause -------------");
+	    }
+	 private void  handleShakeEvent(int count)
+	    {
+	        if(count==3)
+	        {
+	            Intent EasterEggActivity = new Intent(this,Credits.class);
+	            // ExpenditureActivity.putExtra("CSVLocation",csvAction.getPath_file());
+	            startActivity(EasterEggActivity);
+	        }
+	    }
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

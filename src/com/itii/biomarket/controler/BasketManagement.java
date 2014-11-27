@@ -34,7 +34,7 @@ public class BasketManagement {
 	}
 
 	public List<Article> getBasket() {
-		System.out.println(articles.size());
+		//System.out.println(articles.size());
 		return articles;
 		// Partie a re-Commiter si mes modifs sont pas bonnes, JEROME.
 		// return null;
@@ -55,14 +55,26 @@ public class BasketManagement {
 		
 		articles.clear();
 	}
-	public void addItem(String nomArticle) {
-		System.out.println("ADD");
-	
+	public Boolean addItem(String nomArticle)  {
+		
+		List<Article> articleslist = new ArrayList<Article>();
 		try {
-			articles.add(getArticle(nomArticle).get(0));
+			articleslist = getArticle(nomArticle);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
+		
+		if(articleslist!=null)
+		{
+			articles.add(articleslist.get(0));
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+			
+		
 	}
 }

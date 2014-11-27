@@ -1,84 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.itii.biomarket"
-    android:versionCode="1"
-    android:versionName="0.1" >
-
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="21" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.arshad.map.permission.MAPS_RECEIVE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />	
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    
-    <permission-group android:name="android.permission-group.STORAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest android:versionCode="1"
+    android:versionName="BioMarket pour ITII"
+    package="com.itii.biomarket" xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.arshad.map.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <permission-group android:name="android.permission-group.STORAGE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
 
 
     -->
-
     <!-- Maps API needs OpenGL ES 2.0. -->
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
-
-    <application
-        android:allowBackup="true"
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <application android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <uses-library android:name="com.google.android.maps" />
-
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+        android:label="@string/app_name" android:theme="@style/AppTheme">
+        <uses-library android:name="com.google.android.maps"/>
+        <activity android:label="@string/app_name" android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
- 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"
-       		android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.itii.biomarket.MainActivity" />
-          </activity>
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".ListStoreActivity"
-            android:label="@string/title_activity_list_store">
-        
+        <activity android:label="@string/title_activity_maps"
+            android:name=".MapsActivity" android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.itii.biomarket.MainActivity"/>
         </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-      
-              android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.itii.biomarket.MainActivity"
-               />
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="@string/google_maps_key"/>
+        <activity android:label="@string/title_activity_list_store" android:name=".ListStoreActivity"/>
+        <activity android:label="@string/title_activity_settings"
+            android:name=".SettingsActivity" android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.itii.biomarket.MainActivity"/>
         </activity>
+        <!--created by ADT ext plugin at 2014-11-27 09:56:25-->
+        <activity android:name=".Credits"/>
     </application>
-
 </manifest>

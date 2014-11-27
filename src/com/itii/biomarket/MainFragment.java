@@ -9,6 +9,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -73,12 +74,19 @@ public class MainFragment extends Fragment {
 				
 				try {
 					//basketManagement.addItem(autoComplete.getText().toString().toLowerCase());
-					MainActivity.basketManagement.addItem(autoComplete.getText().toString().toLowerCase());
-					
+					Boolean articleadd;
+					articleadd = MainActivity.basketManagement.addItem(autoComplete.getText().toString().trim().toLowerCase());
+			
+					Log.d("MAIN",  articleadd+"");
+					if(!articleadd)
+					{
+						Log.d("MAIN", "TOAST");
+						Toast.makeText(getActivity(), R.string.fragment_main_toast, Toast.LENGTH_SHORT).show();
+					}
 					
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
+					
 				}
 				
 			}

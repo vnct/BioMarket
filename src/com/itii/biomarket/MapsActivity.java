@@ -73,6 +73,11 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
         		}
      
         	}
+        	if(parentName.equals("List"))
+        	{
+        		basketSearch = getIntent().getExtras().getBoolean("BASKET");
+        		articleSearch = "";
+        	}
         	
         	Log.println(Log.WARN, "PUTEXTRA", parentName);
 		}
@@ -192,15 +197,19 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
     			{
     				
     					articles = MainActivity.basketManagement.getBasket();
-			
+    					Log.d("FUCK","JE PASSE PAR LE ELSE");
     			}
     			
     			if(articles!=null)
     			{
     				Commercant commercant = storeManagement.findCommercant(articles);
-    				Float latitude = commercant.getLatitude_dg();
-        	        Float longitude = commercant.getLongitude_dg();
-        	        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+    				
+    					Float latitude = commercant.getLatitude_dg();
+            	        Float longitude = commercant.getLongitude_dg();
+            	        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+    				
+    				
+        	       
     			}
     			else
     			{
@@ -222,8 +231,17 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
     			StoreManagement storeManagement = new StoreManagement(getApplicationContext());
     			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
     	    	Integer distance_max = prefs.getInt("seekBar", 50);
-    	    	List<Commercant> list= storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
-    	        for(Commercant commercant : list)
+    	    	List<Commercant> list = new ArrayList<Commercant>();
+    	    	try{
+    	    		list = storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
+        		
+    	    	}
+    	    	catch(Exception e)
+    	    	{
+    	    		list = storeManagement.getAllCommercant();
+    	    		//Log.d("MAPS","getMagasinsDansPerimetre fail");
+    	    	}
+    	    	for(Commercant commercant : list)
     	        {
     	        	System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
     	        	Float latitude = commercant.getLatitude_dg();
