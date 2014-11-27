@@ -68,7 +68,7 @@ public class StoreBaseAdapter extends BaseAdapter{
 	        textViewName.setText(myStoreList.get(position).getNom());
 	        textViewCompatibility.setText(""); 
 	      
-	        textViewPosition.setText(String.valueOf(myStoreList.get(position).getDistanceWithUser()));
+	        textViewPosition.setText(""); 
 	        return vue;
 	}
 

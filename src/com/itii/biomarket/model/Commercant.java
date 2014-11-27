@@ -166,8 +166,17 @@ public class Commercant implements Comparable {
 
 	@Override
 	public int compareTo(Object another) {
-		// TODO Auto-generated method stub
-		return 0;
+		Integer toto = 1;
+		Commercant commercant = (Commercant) another;
+		if(commercant.getLatitude_dg()==this.latitude_dg)
+		{
+			if(commercant.getLongitude_dg()==this.longitude_dg)
+			{
+				toto = 0;
+				
+			}
+		}
+		return toto;
 	}
 
 }

@@ -69,6 +69,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
         		basketSearch = getIntent().getExtras().getBoolean("BASKET");
         		if(basketSearch==true)
         		{
+        			
         			articleSearch = getIntent().getExtras().getString("ARTICLE");
         		}
      
@@ -141,9 +142,6 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
     
     private void setUpMapIfNeeded() {
     	
-    	
-	    
-
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
@@ -155,7 +153,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
             if (mMap != null) {
             	mMap.setMyLocationEnabled(true);
             	 mMap.setOnMyLocationChangeListener(this);
-          
+            	 Log.d("mMap","mMap n'est pas nul");
             	 setUpMap();
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(43, 7), 6.0f));
                 
@@ -191,19 +189,21 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+    			
     				
     			}
     			else
     			{
     				
     					articles = MainActivity.basketManagement.getBasket();
-    					Log.d("FUCK","JE PASSE PAR LE ELSE");
+    					
     			}
-    			
+    		
     			if((articles!=null)&&(articles.size()>0))
     			{
     					Commercant commercant = storeManagement.findCommercant(articles);
     				
+    					Log.d("FUCK","Fin du if else");
     					Float latitude = commercant.getLatitude_dg();
             	        Float longitude = commercant.getLongitude_dg();
             	        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
@@ -241,13 +241,18 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
     	    		list = storeManagement.getAllCommercant();
     	    		//Log.d("MAPS","getMagasinsDansPerimetre fail");
     	    	}
-    	    	for(Commercant commercant : list)
-    	        {
-    	        	System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
-    	        	Float latitude = commercant.getLatitude_dg();
-    	        	Float longitude = commercant.getLongitude_dg();
-    	        	mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
-    	        };
+    	    	if(list!=null)
+    	    	{
+    	    		for(Commercant commercant : list)
+        	        {
+        	        	System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
+        	        	Float latitude = commercant.getLatitude_dg();
+        	        	Float longitude = commercant.getLongitude_dg();
+        	        	
+        	        	mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+        	        };
+    	    	}
+    	    	
 	    	}
 	    	
     	}

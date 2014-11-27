@@ -24,8 +24,8 @@ public class Credits extends Activity {
         textView1 = (TextView) findViewById(R.id.eastereggtextView);
         textView2 = (TextView) findViewById(R.id.eastereggtextView2);
         textView3 = (TextView) findViewById(R.id.eastereggtextView3);
-        textView1.setText("Développed by VL , JS , JP");
-        textView2.setText("ITII - 2014");
+        textView1.setText("Developped by BIO MARKET TEAM");
+        textView2.setText("ITII PACA - Promo 2012/2015");
         textView3.setText("https://github.com/vnct/BioMarket");
 
     }
