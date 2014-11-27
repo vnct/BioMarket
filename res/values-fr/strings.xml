@@ -41,4 +41,6 @@
       <string name="fragment_main_buy">Acheter</string>
        <string name="fragment_main_hint">Entrez un article à rechercher</string>
   <string name="fragment_main_toast">Cet article n\'existe pas</string>
+  <string name="title_activity_credits">Credits</string>
+  
 </resources>

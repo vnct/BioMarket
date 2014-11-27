@@ -200,9 +200,9 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
     					Log.d("FUCK","JE PASSE PAR LE ELSE");
     			}
     			
-    			if(articles!=null)
+    			if((articles!=null)&&(articles.size()>0))
     			{
-    				Commercant commercant = storeManagement.findCommercant(articles);
+    					Commercant commercant = storeManagement.findCommercant(articles);
     				
     					Float latitude = commercant.getLatitude_dg();
             	        Float longitude = commercant.getLongitude_dg();

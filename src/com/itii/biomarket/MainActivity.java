@@ -91,11 +91,7 @@ public class MainActivity extends Activity implements
 
 	            @Override
 	            public void onShake(int count) {
-	                /*
-	                 * The following method, "handleShakeEvent(count):" is a stub //
-	                 * method you would use to setup whatever you want done once the
-	                 * device has been shook.
-	                 */
+	              
 	 
 	                  handleShakeEvent(count);
 	            }
@@ -139,7 +135,7 @@ public class MainActivity extends Activity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		  mSensorManager.registerListener(mShakeDetector, mAccelerometer,    SensorManager.SENSOR_DELAY_UI);
+		 mSensorManager.registerListener(mShakeDetector, mAccelerometer,    SensorManager.SENSOR_DELAY_UI);
 	};
 	
 

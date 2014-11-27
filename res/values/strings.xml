@@ -40,7 +40,7 @@
     <string name="trouver_le_plus_proche">Find the closest</string>
       <string name="fragment_main_buy">Buy</string>
         <string name="fragment_main_hint">Enter a product to find</string>
-	
+	 <string name="title_activity_credits">Credits</string>
     <string name="fragment_main_toast">This article doesn\'t exist</string>
 
 </resources>

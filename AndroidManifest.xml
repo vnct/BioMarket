@@ -38,11 +38,11 @@
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
         <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="@string/google_maps_key"/>
         <activity android:label="@string/title_activity_list_store" android:name=".ListStoreActivity"/>
+        <activity android:label="@string/title_activity_credits" android:name=".Credits"/>
         <activity android:label="@string/title_activity_settings"
             android:name=".SettingsActivity" android:parentActivityName=".MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.itii.biomarket.MainActivity"/>
         </activity>
-        <!--created by ADT ext plugin at 2014-11-27 09:56:25-->
-        <activity android:name=".Credits"/>
+ 
     </application>
 </manifest>
