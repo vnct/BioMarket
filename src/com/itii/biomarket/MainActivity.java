@@ -81,7 +81,7 @@ public class MainActivity extends Activity implements
 			basketManagement= new BasketManagement(getApplicationContext());
 			}
 		
-		Log.println(Log.INFO, "MainActivity", "onCreate");
+		
 
 		 mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 	        mAccelerometer = mSensorManager
@@ -96,13 +96,13 @@ public class MainActivity extends Activity implements
 	                 * method you would use to setup whatever you want done once the
 	                 * device has been shook.
 	                 */
-	            	System.out.println("TOTO count");
-	                             handleShakeEvent(count);
+	 
+	                  handleShakeEvent(count);
 	            }
 	        });
 		
 		
-				
+	        Log.println(Log.INFO, "MainActivity", "onCreate");
 
 	}
 	  public void onPause()
@@ -117,7 +117,7 @@ public class MainActivity extends Activity implements
 	        if(count==3)
 	        {
 	            Intent EasterEggActivity = new Intent(this,Credits.class);
-	            // ExpenditureActivity.putExtra("CSVLocation",csvAction.getPath_file());
+	   
 	            startActivity(EasterEggActivity);
 	        }
 	    }
@@ -139,6 +139,7 @@ public class MainActivity extends Activity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
+		  mSensorManager.registerListener(mShakeDetector, mAccelerometer,    SensorManager.SENSOR_DELAY_UI);
 	};
 	
 
