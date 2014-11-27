@@ -80,8 +80,7 @@ public class ListStoreFragment extends Fragment implements LocationListener	{
 		//BasketManagement basketManagement = new BasketManagement(getActivity());
 		
 		List<Article> articles = MainActivity.basketManagement.getBasket();
-		System.out.println("articles " + articles);
-		System.out.println("articles " + articles.size());
+	
 	
 		if((articles!=null)&&(articles.size()>0))
 		{
@@ -97,6 +96,10 @@ public class ListStoreFragment extends Fragment implements LocationListener	{
 	    	try
 	    	{
 	    		listCommercant= storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
+	    		if(listCommercant==null)
+	    		{
+	    			listCommercant = storeManagement.getAllCommercant();
+	    		}
 	    	}
 	    	catch(Exception e)
 	    	{
