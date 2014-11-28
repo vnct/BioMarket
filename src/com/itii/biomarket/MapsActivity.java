@@ -108,6 +108,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 	}
 	@Override
 	public void onStop() {
+		
 		super.onStop();
 	};
 

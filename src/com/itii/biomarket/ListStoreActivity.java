@@ -2,13 +2,14 @@ package com.itii.biomarket;
 
 
 
-import android.app.Activity;
+import com.itii.biomarket.controler.BasketManagement;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,7 +19,6 @@ public class ListStoreActivity extends Activity  implements NavigationDrawerFrag
 
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 	private String parentName;
-
 
 
 	@Override
@@ -141,6 +141,20 @@ public class ListStoreActivity extends Activity  implements NavigationDrawerFrag
 			startActivity(i);
 			break;
 		}
+
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		System.out.println("onResume");
+		if(MainActivity.basketManagement==null)
+		{
+			MainActivity.basketManagement = new BasketManagement(getApplicationContext());
+		}
+
 
 	}
 

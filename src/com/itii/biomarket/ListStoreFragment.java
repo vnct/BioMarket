@@ -140,6 +140,7 @@ public class ListStoreFragment extends Fragment implements LocationListener	{
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+	
 
 
 		if(actionMode!=null)
