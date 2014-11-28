@@ -46,10 +46,10 @@ public class SettingsActivity extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		setupActionBar();
 		setTheme(R.style.AppSettings);
-		
-		
-		
-		
+
+
+
+
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class SettingsActivity extends PreferenceActivity {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			// Show the Up button in the action bar.
 			getActionBar().setDisplayHomeAsUpEnabled(true);
-			
+
 		}
 	}
 
@@ -129,13 +129,13 @@ public class SettingsActivity extends PreferenceActivity {
 		bindPreferenceSummaryToValue(findPreference("example_list"));
 		bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
 		bindPreferenceSummaryToValue(findPreference("sync_frequency"));
-		
-		*/
+
+		 */
 	}
-	 @Override
-     protected final boolean isValidFragment(final String fragmentName) {
-         return (GeneralPreferenceFragment.class.getName().equals(fragmentName));
-    }
+	@Override
+	protected final boolean isValidFragment(final String fragmentName) {
+		return (GeneralPreferenceFragment.class.getName().equals(fragmentName));
+	}
 	/** {@inheritDoc} */
 	@Override
 	public boolean onIsMultiPane() {
@@ -189,8 +189,8 @@ public class SettingsActivity extends PreferenceActivity {
 
 				// Set the summary to reflect the new value.
 				preference
-						.setSummary(index >= 0 ? listPreference.getEntries()[index]
-								: null);
+				.setSummary(index >= 0 ? listPreference.getEntries()[index]
+						: null);
 
 			} else if (preference instanceof RingtonePreference) {
 				// For ringtone preferences, look up the correct display value
@@ -237,7 +237,7 @@ public class SettingsActivity extends PreferenceActivity {
 	private static void bindPreferenceSummaryToValue(Preference preference) {
 		// Set the listener to watch for value changes.
 		preference
-				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+		.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
 		// Trigger the listener immediately with the preference's
 		// current value.
@@ -245,7 +245,7 @@ public class SettingsActivity extends PreferenceActivity {
 				preference,
 				PreferenceManager.getDefaultSharedPreferences(
 						preference.getContext()).getString(preference.getKey(),
-						""));
+								""));
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class SettingsActivity extends PreferenceActivity {
 			// to their values. When their values change, their summaries are
 			// updated to reflect the new value, per the Android Design
 			// guidelines.
-		/*	bindPreferenceSummaryToValue(findPreference("example_text"));
+			/*	bindPreferenceSummaryToValue(findPreference("example_text"));
 			bindPreferenceSummaryToValue(findPreference("example_list"));*/
 		}
 	}
@@ -274,11 +274,11 @@ public class SettingsActivity extends PreferenceActivity {
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public static class NotificationPreferenceFragment extends
-			PreferenceFragment {
+	PreferenceFragment {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-		//	addPreferencesFromResource(R.xml.pref_notification);
+			//	addPreferencesFromResource(R.xml.pref_notification);
 
 			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
 			// to their values. When their values change, their summaries are
@@ -297,7 +297,7 @@ public class SettingsActivity extends PreferenceActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-		//	addPreferencesFromResource(R.xml.pref_data_sync);
+			//	addPreferencesFromResource(R.xml.pref_data_sync);
 
 			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
 			// to their values. When their values change, their summaries are

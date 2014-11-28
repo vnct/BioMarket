@@ -19,7 +19,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 
 public class MainActivity extends Activity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks, ViewPager.OnPageChangeListener {
+NavigationDrawerFragment.NavigationDrawerCallbacks, ViewPager.OnPageChangeListener {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -36,7 +36,7 @@ public class MainActivity extends Activity implements
 	 * {@link android.support.v13.app.FragmentStatePagerAdapter}.
 	 */
 	private MainSectionsPagerAdapter mSectionsPagerAdapter;
-	
+
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
@@ -48,25 +48,25 @@ public class MainActivity extends Activity implements
 	 */
 	private CharSequence mTitle;
 	private int itemCurrent;
-	 private SensorManager mSensorManager;
-	    private Sensor mAccelerometer;
-	    private ShakeDetector mShakeDetector;
+	private SensorManager mSensorManager;
+	private Sensor mAccelerometer;
+	private ShakeDetector mShakeDetector;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		 mTitle = getTitle();
-		
+
+		mTitle = getTitle();
+
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
-		
+
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
-		
+
 		mSectionsPagerAdapter = new MainSectionsPagerAdapter(getFragmentManager(),getApplicationContext());
 
 		// Set up the ViewPager with the sections adapter.
@@ -74,50 +74,54 @@ public class MainActivity extends Activity implements
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
 		mViewPager.setOnPageChangeListener(this);
-		
-		
+
+
 		if(basketManagement==null)
-			{
+		{
 			basketManagement= new BasketManagement(getApplicationContext());
+		}
+
+
+		/*
+		 * Easter eggs
+		 * 
+		 */
+
+		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		mAccelerometer = mSensorManager
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		mShakeDetector = new ShakeDetector();
+		mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
+			@Override
+			public void onShake(int count) {
+
+
+				handleShakeEvent(count);
 			}
-		
-		
+		});
 
-		 mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-	        mAccelerometer = mSensorManager
-	                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-	        mShakeDetector = new ShakeDetector();
-	        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
 
-	            @Override
-	            public void onShake(int count) {
-	              
-	 
-	                  handleShakeEvent(count);
-	            }
-	        });
-		
-		
-	        Log.println(Log.INFO, "MainActivity", "onCreate");
+		Log.println(Log.INFO, "MainActivity", "onCreate");
 
 	}
-	  public void onPause()
-	    {
+	public void onPause()
+	{
 
-	        mSensorManager.unregisterListener(mShakeDetector);
-	        super.onPause();
-	        //    System.out.println("------------- MainActivity - onPause -------------");
-	    }
-	 private void  handleShakeEvent(int count)
-	    {
-	        if(count==3)
-	        {
-	            Intent EasterEggActivity = new Intent(this,Credits.class);
-	   
-	            startActivity(EasterEggActivity);
-	        }
-	    }
-	
+		mSensorManager.unregisterListener(mShakeDetector);
+		super.onPause();
+		//    System.out.println("------------- MainActivity - onPause -------------");
+	}
+	private void  handleShakeEvent(int count)
+	{
+		if(count==3)
+		{
+			Intent EasterEggActivity = new Intent(this,Credits.class);
+
+			startActivity(EasterEggActivity);
+		}
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try
@@ -129,15 +133,15 @@ public class MainActivity extends Activity implements
 		{
 			mViewPager.setCurrentItem(page);
 		}
-	//	
-		
+		//	
+
 	};
 	@Override
 	protected void onResume() {
 		super.onResume();
-		 mSensorManager.registerListener(mShakeDetector, mAccelerometer,    SensorManager.SENSOR_DELAY_UI);
+		mSensorManager.registerListener(mShakeDetector, mAccelerometer,    SensorManager.SENSOR_DELAY_UI);
 	};
-	
+
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
@@ -167,22 +171,22 @@ public class MainActivity extends Activity implements
 				Log.println(Log.ERROR, "MainActivity", "onSectionAttached - case 1");
 			}
 			mTitle = getString(R.string.title_home);
-			
+
 			break;
 		case 2:
-			
-		    i = new Intent(getApplicationContext(), MapsActivity.class);
-		    i.putExtra("PARENTNAME",parentname);
-		    i.putExtra("BASKET", false);
-	        startActivityForResult(i, 1);
-	    
-	        
+
+			i = new Intent(getApplicationContext(), MapsActivity.class);
+			i.putExtra("PARENTNAME",parentname);
+			i.putExtra("BASKET", false);
+			startActivityForResult(i, 1);
+
+
 			break;
 		case 3:
 			i = new Intent(getApplicationContext(), ListStoreActivity.class);;
 			i.putExtra("PARENTNAME",parentname);
 			i.putExtra("BASKET", false);
-	        startActivityForResult(i, 1);
+			startActivityForResult(i, 1);
 			break;
 		case 4:
 			mTitle = getString(R.string.title_basket);
@@ -191,7 +195,7 @@ public class MainActivity extends Activity implements
 		case 5:
 			//mTitle = getString(R.string.title_settings);
 			i = new Intent(getApplicationContext(), SettingsActivity.class);
-	        startActivity(i);
+			startActivity(i);
 			break;
 		}
 	}
@@ -203,13 +207,13 @@ public class MainActivity extends Activity implements
 		actionBar.setTitle(mTitle);
 	}
 
-	
-	
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		
-	
-	    
+
+
+
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
@@ -227,18 +231,18 @@ public class MainActivity extends Activity implements
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		 int id = item.getItemId();
-		 switch (id) {
+		int id = item.getItemId();
+		switch (id) {
 		case R.id.menu_basket_new:
 			mViewPager.setCurrentItem(0);
 			break;
 		case R.id.menu_basket_location:
 			Intent i;
 			i = new Intent(getApplicationContext(), MapsActivity.class);
-		    i.putExtra("PARENTNAME","Home");
-		    i.putExtra("BASKET", true); // on spécifie qu'on va chercher le contenu du basket
-		    i.putExtra("ARTICLE", "");
-	        startActivityForResult(i, 1);		
+			i.putExtra("PARENTNAME","Home");
+			i.putExtra("BASKET", true); // on spécifie qu'on va chercher le contenu du basket
+			i.putExtra("ARTICLE", "");
+			startActivityForResult(i, 1);		
 			break;
 		case R.id.menu_basket_discard:
 			//BasketManagement basketManagement = new BasketManagement(getApplicationContext());
@@ -247,28 +251,28 @@ public class MainActivity extends Activity implements
 			break;
 		case R.id.action_settings:
 			i = new Intent(getApplicationContext(), SettingsActivity.class);
-	        startActivity(i);
+			startActivity(i);
 			break;
 		default:
 			break;
 		}
-		
-		 
-		 
+
+
+
 		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		
-	
-	//	mViewPager.
+
+
+		//	mViewPager.
 	}
 
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		
-		
+
+
 	}
 
 	@Override
@@ -277,15 +281,15 @@ public class MainActivity extends Activity implements
 		mTitle = mViewPager.getAdapter().getPageTitle(arg0);
 		//mViewPager.setAdapter(mSectionsPagerAdapter);
 		//mViewPager.setCurrentItem(arg0);
-		
+
 		mSectionsPagerAdapter.notifyDataSetChanged();
 		Log.println(Log.INFO, "MainActivity", "onPageSelected " + mTitle);
-		
-		
+
+
 	}
 
-	
 
-	
+
+
 
 }

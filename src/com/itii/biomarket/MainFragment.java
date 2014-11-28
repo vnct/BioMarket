@@ -41,8 +41,8 @@ public class MainFragment extends Fragment {
 	private Button buyButton;
 	private AutoCompleteTextView autoComplete;
 	private    List<Article> articleList = new ArrayList<Article>();
-	
-	
+
+
 	public static  MainFragment newInstance(int sectionNumber) {
 		MainFragment fragment = new MainFragment();
 
@@ -51,89 +51,89 @@ public class MainFragment extends Fragment {
 		fragment.setArguments(args);
 		return fragment;
 	}
-	
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_main, container,
 				false);
-		
+
 		/* Mise en place de l'autocomplétion dans la barre de recherche **/
 		autoComplete = (AutoCompleteTextView)rootView.findViewById(R.id.autoCompleteTextView1);
 		addButton = (Button) rootView.findViewById(R.id.button2);
-	
+
 		buyButton = (Button) rootView.findViewById(R.id.button1);
-		
+
 		addButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
+
 				//BasketManagement basketManagement = new BasketManagement(getActivity());
-				
+
 				try {
 					//basketManagement.addItem(autoComplete.getText().toString().toLowerCase());
 					Boolean articleadd;
 					articleadd = MainActivity.basketManagement.addItem(autoComplete.getText().toString().trim().toLowerCase());
-			
+
 					Log.d("MAIN",  articleadd+"");
 					if(!articleadd)
 					{
 						Log.d("MAIN", "TOAST");
 						Toast.makeText(getActivity(), R.string.fragment_main_toast, Toast.LENGTH_SHORT).show();
 					}
-					
+
 				} catch (Exception e) {
-					
-					
+
+
 				}
-				
+
 			}
 		});
 		buyButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent i;
-				 i = new Intent(getActivity(), MapsActivity.class);
-				 i.putExtra("PARENTNAME","Home");
-				 i.putExtra("BASKET", true);
-				 i.putExtra("ARTICLE", autoComplete.getText().toString().toLowerCase());
-			     startActivityForResult(i, 1);
-				
+				i = new Intent(getActivity(), MapsActivity.class);
+				i.putExtra("PARENTNAME","Home");
+				i.putExtra("BASKET", true);
+				i.putExtra("ARTICLE", autoComplete.getText().toString().toLowerCase());
+				startActivityForResult(i, 1);
+
 			}
 		});
-	
+
 		/* Instanciation de l'objet permettant de gérer le magasin et les articles **/
 		//BasketManagement basketManagement = new BasketManagement(getActivity());
-	
 
-        /* Déclaration d'une liste d'objet Article **/
-     
+
+		/* Déclaration d'une liste d'objet Article **/
+
 		try {
 			articleList = MainActivity.basketManagement.getArticles();
-		
-        /* Déclaration d'un tableau de String de la taille de la liste précédente **/
-        String[] autoCompletString = new String[articleList.size()];
-        
-        /* Récupération des noms des articles de la liste pou les mettre dans le tableau de String  **/
-        if(articleList != null) {
-        	int i = 0;
-        	
-			for(Article m : articleList)
-			{
-				autoCompletString[i] = m.getNom();
-				i++;
-			}
-        }
 
-        /* ArrayAdaptater permet un affichage de la liste avec le style Android **/
-		ArrayAdapter<String> adp=new ArrayAdapter<String>(this.getActivity(),
-        		android.R.layout.simple_dropdown_item_1line,autoCompletString);
- 
-		autoComplete.setAdapter(adp);
-			} catch (SQLException e) {
+			/* Déclaration d'un tableau de String de la taille de la liste précédente **/
+			String[] autoCompletString = new String[articleList.size()];
+
+			/* Récupération des noms des articles de la liste pou les mettre dans le tableau de String  **/
+			if(articleList != null) {
+				int i = 0;
+
+				for(Article m : articleList)
+				{
+					autoCompletString[i] = m.getNom();
+					i++;
+				}
+			}
+
+			/* ArrayAdaptater permet un affichage de la liste avec le style Android **/
+			ArrayAdapter<String> adp=new ArrayAdapter<String>(this.getActivity(),
+					android.R.layout.simple_dropdown_item_1line,autoCompletString);
+
+			autoComplete.setAdapter(adp);
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -141,10 +141,10 @@ public class MainFragment extends Fragment {
 	}
 
 
-	
-	
+
+
 	private OnClickListener clickBuy() {
-		
+
 		return null;
 	}
 

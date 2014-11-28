@@ -56,7 +56,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private ListView mDrawerListView;
 	private View mFragmentContainerView;
 
-//	private int mCurrentSelectedPosition = 0;
+	//	private int mCurrentSelectedPosition = 0;
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;
 
@@ -67,7 +67,7 @@ public class NavigationDrawerFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		
+
 		// Read in the flag indicating whether or not the user has demonstrated
 		// awareness of the
 		// drawer. See PREF_USER_LEARNED_DRAWER for details.
@@ -98,23 +98,23 @@ public class NavigationDrawerFragment extends Fragment {
 		mDrawerListView = (ListView) inflater.inflate(
 				R.layout.fragment_navigation_drawer, container, false);
 		mDrawerListView
-				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						selectItem(position);
-					}
-				});
-	
+		.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				selectItem(position);
+			}
+		});
+
 		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
 				.getThemedContext(),
 				R.layout.drawer_list_item,
 				android.R.id.text1, new String[] {
-						getString(R.string.title_home),
-						getString(R.string.title_maps),
-						getString(R.string.title_list),
-						getString(R.string.title_basket),
-						getString(R.string.title_settings),}));	
+			getString(R.string.title_home),
+			getString(R.string.title_maps),
+			getString(R.string.title_list),
+			getString(R.string.title_basket),
+			getString(R.string.title_settings),}));	
 		return mDrawerListView;
 	}
 
@@ -150,17 +150,17 @@ public class NavigationDrawerFragment extends Fragment {
 		// ActionBarDrawerToggle ties together the the proper interactions
 		// between the navigation drawer and the action bar app icon.
 		mDrawerToggle = new ActionBarDrawerToggle(getActivity(), /* host Activity */
-		mDrawerLayout, /* DrawerLayout object */
-		R.drawable.ic_action_navigation_menu, /* nav drawer image to replace 'Up' caret */
-		R.string.navigation_drawer_open, /*
-										 * "open drawer" description for
-										 * accessibility
-										 */
-		R.string.navigation_drawer_close /*
-										 * "close drawer" description for
-										 * accessibility
-										 */
-		) {
+				mDrawerLayout, /* DrawerLayout object */
+				R.drawable.ic_action_navigation_menu, /* nav drawer image to replace 'Up' caret */
+				R.string.navigation_drawer_open, /*
+				 * "open drawer" description for
+				 * accessibility
+				 */
+				R.string.navigation_drawer_close /*
+				 * "close drawer" description for
+				 * accessibility
+				 */
+				) {
 			@Override
 			public void onDrawerClosed(View drawerView) {
 				super.onDrawerClosed(drawerView);
@@ -169,7 +169,7 @@ public class NavigationDrawerFragment extends Fragment {
 				}
 
 				getActivity().invalidateOptionsMenu(); // calls
-														// onPrepareOptionsMenu()
+				// onPrepareOptionsMenu()
 			}
 
 			@Override
@@ -187,11 +187,11 @@ public class NavigationDrawerFragment extends Fragment {
 					SharedPreferences sp = PreferenceManager
 							.getDefaultSharedPreferences(getActivity());
 					sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true)
-							.apply();
+					.apply();
 				}
 
 				getActivity().invalidateOptionsMenu(); // calls
-														// onPrepareOptionsMenu()
+				// onPrepareOptionsMenu()
 			}
 		};
 
@@ -275,8 +275,8 @@ public class NavigationDrawerFragment extends Fragment {
 			return true;
 		}
 
-		
-	
+
+
 
 		return super.onOptionsItemSelected(item);
 	}
@@ -290,7 +290,7 @@ public class NavigationDrawerFragment extends Fragment {
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(true);
 		//actionBar.setIcon(R.drawable.ic_action_navigation_menu);
-	
+
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setTitle(R.string.app_name);
 	}

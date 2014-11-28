@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 public class StoreBaseAdapter extends BaseAdapter{
 
-	 private LayoutInflater mInflater;
-	 private Context mContext;
-	 List<Commercant> myStoreList;
-	    
-    public List<Commercant> getMyStoreList() {
+	private LayoutInflater mInflater;
+	private Context mContext;
+	List<Commercant> myStoreList;
+
+	public List<Commercant> getMyStoreList() {
 		return myStoreList;
 	}
 
@@ -30,10 +30,10 @@ public class StoreBaseAdapter extends BaseAdapter{
 	public StoreBaseAdapter(Context context, List<Commercant> storeList){
 		myStoreList = storeList;
 		mContext = context;
-        mInflater = LayoutInflater.from(mContext);
-    }   
-	    
-	    
+		mInflater = LayoutInflater.from(mContext);
+	}   
+
+
 	@Override
 	public int getCount() {
 		return myStoreList.size();
@@ -41,35 +41,35 @@ public class StoreBaseAdapter extends BaseAdapter{
 
 	@Override
 	public Object getItem(int position) {
-		 return myStoreList.get(position);
+		return myStoreList.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		 return position;
+		return position;
 	}
 
 	// Permet de créer la tete de la liste a afficher dans la storelist
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		 View vue = null;
-	        if(convertView != null)
-	        {
-	            vue = convertView;
-	        }
-	        else
-	        {
-	            vue = mInflater.inflate(R.layout.storebaseadapter, parent, false);
-	        }
-	
-	        TextView textViewName = (TextView) vue.findViewById(R.id.textViewStoreName);
-	        TextView textViewCompatibility = (TextView) vue.findViewById(R.id.textViewStoreCompatibility);
-	        TextView textViewPosition = (TextView) vue.findViewById(R.id.textViewStorePosition);
-	        textViewName.setText(myStoreList.get(position).getNom());
-	        textViewCompatibility.setText(""); 
-	      
-	        textViewPosition.setText(""); 
-	        return vue;
+		View vue = null;
+		if(convertView != null)
+		{
+			vue = convertView;
+		}
+		else
+		{
+			vue = mInflater.inflate(R.layout.storebaseadapter, parent, false);
+		}
+
+		TextView textViewName = (TextView) vue.findViewById(R.id.textViewStoreName);
+		TextView textViewCompatibility = (TextView) vue.findViewById(R.id.textViewStoreCompatibility);
+		TextView textViewPosition = (TextView) vue.findViewById(R.id.textViewStorePosition);
+		textViewName.setText(myStoreList.get(position).getNom());
+		textViewCompatibility.setText(""); 
+
+		textViewPosition.setText(""); 
+		return vue;
 	}
 
 }

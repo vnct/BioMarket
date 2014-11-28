@@ -14,25 +14,25 @@ import android.widget.TextView;
 public class BasketBaseAdapter extends BaseAdapter{
 
 	private LayoutInflater mInflater;
-    private Context mContext;
-    List<Article> mybasketList;
-    
-    
+	private Context mContext;
+	List<Article> mybasketList;
 
-    public List<Article> getBasketList() {
+
+
+	public List<Article> getBasketList() {
 		return mybasketList;
 	}
 	public void setBasketList(List<Article> basketList) {
 		this.mybasketList = basketList;
 	}
 	public BasketBaseAdapter(Context context, List<Article> basketList){
-        mContext = context;
-        mybasketList = basketList;
-        mInflater = LayoutInflater.from(mContext);
-    }
+		mContext = context;
+		mybasketList = basketList;
+		mInflater = LayoutInflater.from(mContext);
+	}
 	@Override
 	public int getCount() {
-		   return mybasketList.size();
+		return mybasketList.size();
 	}
 
 	@Override
@@ -42,27 +42,34 @@ public class BasketBaseAdapter extends BaseAdapter{
 
 	@Override
 	public long getItemId(int position) {
-		 return position;
+		return position;
 	}
 
+	
+	/*
+	 * getView . Permet un affichage personnalisé des elements d'une liste. 
+	 * Utilise le R.layout.basketbaseadapter
+	 * 
+	 * 
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		  View vue = null;
-	        if(convertView != null)
-	        {
-	            vue = convertView;
-	        }
-	        else
-	        {
-	            vue = mInflater.inflate(R.layout.basketbaseadapter, parent, false);
-	        }
-	        TextView textViewQuantity = (TextView) vue.findViewById(R.id.textViewBasketQuantity);
-	        TextView textViewName = (TextView) vue.findViewById(R.id.textViewBasketName);
-	        textViewName.setText(mybasketList.get(position).getNom());
-	        textViewQuantity.setText(mybasketList.get(position).getCategorie());
-	       
+		View vue = null;
+		if(convertView != null)
+		{
+			vue = convertView;
+		}
+		else
+		{
+			vue = mInflater.inflate(R.layout.basketbaseadapter, parent, false);
+		}
+		TextView textViewQuantity = (TextView) vue.findViewById(R.id.textViewBasketQuantity);
+		TextView textViewName = (TextView) vue.findViewById(R.id.textViewBasketName);
+		textViewName.setText(mybasketList.get(position).getNom());
+		textViewQuantity.setText(mybasketList.get(position).getCategorie());
 
-	        return vue;
+
+		return vue;
 	}
 
 }

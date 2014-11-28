@@ -18,24 +18,24 @@ import android.util.Log;
  *
  */
 public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
-	
+
 	private Context mContext;
-	
+
 	public MainSectionsPagerAdapter(FragmentManager fm,Context context) {
 		super(fm);
-		 mContext = context;
+		mContext = context;
 		// TODO Auto-generated constructor stub
 	}
 
 
 	private int current_position=0;
 
-    public void set_current_position(int i) {
-        current_position = i;
-    }
+	public void set_current_position(int i) {
+		current_position = i;
+	}
 
 
-    // Permet de creer le nombre de fragment necessaire à la page HOmePAGE
+	// Permet de creer le nombre de fragment necessaire à la page HOmePAGE
 	@Override
 	public Fragment getItem(int position) {
 		// getItem is called to instantiate the fragment for the given page.
@@ -51,9 +51,9 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 			break;
 		}
 		return null;
-		
-			
-		
+
+
+
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 	}
 	@Override
 	public int getItemPosition(Object object) {
-	    return POSITION_NONE;
+		return POSITION_NONE;
 	}
 
 }
