@@ -65,22 +65,25 @@ public class MainFragment extends Fragment {
 
 		buyButton = (Button) rootView.findViewById(R.id.button1);
 
+		/*
+		 * Action lors du clic sur AJOUTER AU PANIER
+		 *
+		 * 
+		 */
 		addButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
-				//BasketManagement basketManagement = new BasketManagement(getActivity());
 
 				try {
 					//basketManagement.addItem(autoComplete.getText().toString().toLowerCase());
 					Boolean articleadd;
 					articleadd = MainActivity.basketManagement.addItem(autoComplete.getText().toString().trim().toLowerCase());
 
-					Log.d("MAIN",  articleadd+"");
+					//Log.d("MAIN",  articleadd+"");
 					if(!articleadd)
 					{
-						Log.d("MAIN", "TOAST");
+						//Log.d("MAIN", "TOAST");
 						Toast.makeText(getActivity(), R.string.fragment_main_toast, Toast.LENGTH_SHORT).show();
 					}
 
@@ -91,6 +94,10 @@ public class MainFragment extends Fragment {
 
 			}
 		});
+		/*
+		 * Action lors du clic ACHETER
+		 * 
+		 */
 		buyButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -139,16 +146,6 @@ public class MainFragment extends Fragment {
 		}
 		return rootView;
 	}
-
-
-
-
-	private OnClickListener clickBuy() {
-
-		return null;
-	}
-
-
 
 
 

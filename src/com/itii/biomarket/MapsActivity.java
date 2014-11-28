@@ -182,7 +182,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 
 				if(articleSearch.length()>0)
 				{
-					System.out.println(articleSearch);
+					//System.out.println(articleSearch);
 					try {
 						articles = MainActivity.basketManagement.getArticle(articleSearch);
 					} catch (SQLException e) {
@@ -201,13 +201,14 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 
 				if((articles!=null)&&(articles.size()>0))
 				{
-					Commercant commercant = storeManagement.findCommercant(articles);
-
-					Log.d("FUCK","Fin du if else");
-					Float latitude = commercant.getLatitude_dg();
-					Float longitude = commercant.getLongitude_dg();
-					mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
-
+					List<Commercant> commercants = storeManagement.findAllCommercants(articles);
+					for(Commercant commercant : commercants)
+					{
+						//System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
+						Float latitude = commercant.getLatitude_dg();
+						Float longitude = commercant.getLongitude_dg();
+						mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
+					};
 
 
 				}
@@ -216,7 +217,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 					List<Commercant> commercants = storeManagement.getAllCommercant();
 					for(Commercant commercant : commercants)
 					{
-						System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
+						//System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
 						Float latitude = commercant.getLatitude_dg();
 						Float longitude = commercant.getLongitude_dg();
 						mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(commercant.getNom()));
@@ -245,7 +246,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 				{
 					for(Commercant commercant : list)
 					{
-						System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
+						//System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
 						Float latitude = commercant.getLatitude_dg();
 						Float longitude = commercant.getLongitude_dg();
 
