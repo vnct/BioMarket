@@ -19,20 +19,34 @@ public class BasketManagement {
 		articles = new ArrayList<Article>();
 	}
 
+	/*
+	 * Récupere les articles de la BDD
+	 */
 	public List<Article> getArticles() throws SQLException {
 		return basketDB.getArticles();
 	}
 
+	/*
+	 * Récupere les articles en fonction de son nom
+	 */
 	public List<Article> getArticle(String nomArticle) throws SQLException {
 		return basketDB.getArticle(nomArticle);
 	}
 
+	
+	/*
+	 * Récupère les articles au plus proche
+	 * 
+	 */
 	public Article getArticleAuPlusProche(String nomArticle,
 			float latitudeClient, float longitudeClient) throws SQLException {
 		return basketDB.getArticleAuPlusProche(nomArticle, latitudeClient,
 				longitudeClient);
 	}
 
+	/* 
+	 * R2cupère le basket
+	 */
 	public List<Article> getBasket() {
 		//System.out.println(articles.size());
 		return articles;
@@ -40,6 +54,9 @@ public class BasketManagement {
 		// return null;
 	}
 
+	/*
+	 * SUpprime un article du basket
+	 */
 	public void removeItem(Article article) {
 		if (articles.contains(article)) {
 			articles.remove(article);
@@ -47,14 +64,24 @@ public class BasketManagement {
 		// Tout supprimer si mes modifs sont nulles, JEROME.
 	}
 
+	/*
+	 * Ajout un article dans le basket
+	 */
 	public void addItem(Article article) {
 		articles.add(article);
 		// Tout supprimer si mes modifs sont nulles, JEROME.
 	}
+	/*
+	 * 
+	 * Supprime le basket
+	 */
 	public void removeBasket() {
 		
 		articles.clear();
 	}
+	/*
+	 * Ajoute un item en fonction de son nom
+	 */
 	public Boolean addItem(String nomArticle)  {
 		
 		List<Article> articleslist = new ArrayList<Article>();
