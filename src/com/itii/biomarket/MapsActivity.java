@@ -19,7 +19,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -171,15 +170,12 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 	 */
 	private void setUpMap() {
 
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		Integer distance_max = prefs.getInt("seekBar", 50);
-		StoreManagement storeManagement = new StoreManagement(getApplicationContext());
 		// TODO RECUPERER LES STORES AVEC LEURS NOMS
 		if(parentName.equals("List")||parentName.equals("Home"))
 		{
 			if(basketSearch==true)
 			{
-				
+				StoreManagement storeManagement = new StoreManagement(getApplicationContext());
 				//	BasketManagement basketManagement = new BasketManagement(getApplicationContext());
 
 				List<Article> articles = new ArrayList<Article>();
@@ -205,19 +201,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 
 				if((articles!=null)&&(articles.size()>0))
 				{
-					
-					List<Commercant> commercants = new ArrayList<Commercant>();
-					try{
-						commercants = storeManagement.findAllCommercantsInPerim(articles,(float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
-						
-					}
-					catch(Exception e)
-					{
-						commercants = storeManagement.findAllCommercants(articles);
-						Toast.makeText(getApplication(), R.string.maps_toast_proximity, Toast.LENGTH_LONG);
-					}
-					
-				
+					List<Commercant> commercants = storeManagement.findAllCommercants(articles);
 					for(Commercant commercant : commercants)
 					{
 						//System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
@@ -230,17 +214,8 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 				}
 				else
 				{
-					List<Commercant> list = new ArrayList<Commercant>();
-					try{
-						list = storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
-						
-					}
-					catch(Exception e)
-					{
-						list = storeManagement.getAllCommercant();
-						Toast.makeText(getApplicationContext(), R.string.maps_toast_proximity, Toast.LENGTH_LONG);
-					}
-					for(Commercant commercant : list)
+					List<Commercant> commercants = storeManagement.getAllCommercant();
+					for(Commercant commercant : commercants)
 					{
 						//System.out.println(commercant.getNom() + " --> " + commercant.getLatitude_dg() + " --> " + commercant.getLongitude_dg());
 						Float latitude = commercant.getLatitude_dg();
@@ -254,12 +229,13 @@ NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleMap.OnMyLocationChange
 			}
 			else
 			{
-				
-				
+				StoreManagement storeManagement = new StoreManagement(getApplicationContext());
+				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+				Integer distance_max = prefs.getInt("seekBar", 50);
 				List<Commercant> list = new ArrayList<Commercant>();
 				try{
 					list = storeManagement.getMagasinsDansPerimetre((float)location.getLatitude(), (float)location.getLongitude(),(float)(distance_max*100.0));
-					
+
 				}
 				catch(Exception e)
 				{

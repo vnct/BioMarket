@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest android:versionCode="1"
-    android:versionName="BioMarket pour ITII"
+    android:versionName="1.1 --> Créé par ITII PACA / Promo 2012/2015"
     package="com.itii.biomarket" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21"/>
     <uses-permission android:name="android.permission.INTERNET"/>
