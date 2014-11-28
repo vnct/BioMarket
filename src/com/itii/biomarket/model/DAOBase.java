@@ -7,7 +7,7 @@ import android.util.Log;
  
 public abstract class DAOBase {
 	// Nous sommes la premiere version de la base
-	//Si je d�cide de la mettre a jour, il faut changer cet attribut
+	// Si je décide de la mettre à jour, il faut changer cet attribut
  
 	protected final static int VERSION = 1;
  
@@ -32,16 +32,20 @@ public abstract class DAOBase {
  
 	public void close()
 	{
+		// Ferme la BDD
 		mDb.close();
 	}
  
  
 	public SQLiteDatabase getDb()
 	{
+		// Returne la BDD
 		return mDb;
 	}
 	
 	public static double getDistanceBetweenTwoPoints(float x1, float y1, float x2, float y2) {
+		
+		// Retourne la distance entre deux points
         double R = 6371000; // m
         double dLat = Math.toRadians(x2 - x1);
         double dLon = Math.toRadians(y2 - y1);

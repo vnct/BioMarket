@@ -24,7 +24,7 @@ public class StoreManagement  {
 	}
 
 	/*
-	 * R2cupère les commercants
+	 * R2cupï¿½re les commercants
 	 * 
 	 */
 	public List<Commercant> getAllCommercant()
@@ -32,21 +32,21 @@ public class StoreManagement  {
 		return storeDB.getMagasins();
 	}
 	/*
-	 * Récupère les infos du commercant
+	 * Rï¿½cupï¿½re les infos du commercant
 	 * 
 	 */
 	public Commercant getInfosCommercant(float latitude, float longitude) {
 		return storeDB.getInfosCommercant(latitude, longitude);
 	}
 	/*
-	 * récupère les magasins dans le périmètre de l'utilisateur
+	 * rï¿½cupï¿½re les magasins dans le pï¿½rimï¿½tre de l'utilisateur
 	 * 
 	 */
 	public List<Commercant> getMagasinsDansPerimetre(float latitudeClient, float longitudeClient, float distance_max) {
 		return storeDB.getMagasinsDansPerimetre(latitudeClient, longitudeClient, distance_max);
 	}
 	/*
-	 * R2écupère les commercant qui on le produit
+	 * R2ï¿½cupï¿½re les commercant qui on le produit
 	 */
 	public Commercant getCommercantHavingTheProduct(Article article) {
 
@@ -149,6 +149,97 @@ public class StoreManagement  {
 	{
 		return orderbyPertinence(articles);
 	}
+	
+	
+	
+	/*
+	 * Retourne une liste de ocmmercant
+	 * 
+	 */
+	public List<Commercant> findAllCommercantsInPerim(List<Article> articles, float latitudeClient, float longitudeClient, float distance_max)
+	{
+		return orderbyPertinenceAndPerim(articles, latitudeClient,  longitudeClient,  distance_max);
+	}
 
+	
+	
+	public List<Commercant> orderbyPertinenceAndPerim(List<Article> articles, float latitudeClient, float longitudeClient, float distance_max) {
+
+		Commercant commercant = null;
+
+
+		int i = 0;
+
+		TreeMap<Commercant, Integer> treeMap = new TreeMap<Commercant, Integer>();
+
+
+		/*
+
+		 * Trying to get a map with shops associated to the number of
+
+		 * occurrences apparitions
+
+		 */
+
+
+		for (Article article : articles) {
+
+			commercant = getCommercantHavingTheProduct(article, latitudeClient,  longitudeClient,  distance_max);
+
+			/* ANcien code avant "commercant = ":storeDB.getInfosCommercant(article.getLatitude_dg(),
+
+		article.getLongitude_dg());*/
+
+			if (treeMap.containsKey(commercant)) {
+
+				i = (Integer) treeMap.get(commercant);
+				
+				treeMap.put(commercant, i++);
+
+			} else {
+
+				treeMap.put(commercant, 1);
+
+			}
+
+		}
+
+		commercants = new ArrayList<Commercant>();
+		
+		
+
+		for (TreeMap.Entry<Commercant, Integer> entree : treeMap.entrySet()) {
+			commercants.add(entree.getKey());
+		
+		}
+
+		return commercants;
+
+	}
+
+	private Commercant getCommercantHavingTheProduct(Article articles, float latitudeClient, float longitudeClient, float distance_max) {
+	
+		Commercant commercant = null;
+
+		List<Commercant> commercantsList = storeDB.getMagasinsDansPerimetre(latitudeClient, longitudeClient, distance_max);
+
+		for (Commercant commercant2 : commercantsList) {
+
+			if (articles.getLatitude_dg() == commercant2.getLatitude_dg()
+
+					&& articles.getLongitude_dg() == commercant2
+
+					.getLongitude_dg()) {
+
+				commercant = commercant2;
+
+			}
+
+		}
+
+		return commercant;
+	}
+
+	
 
 }
