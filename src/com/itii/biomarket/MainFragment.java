@@ -78,8 +78,10 @@ public class MainFragment extends Fragment {
 				try {
 					//basketManagement.addItem(autoComplete.getText().toString().toLowerCase());
 					Boolean articleadd;
-					articleadd = MainActivity.basketManagement.addItem(autoComplete.getText().toString().trim().toLowerCase());
-
+					String article = autoComplete.getText().toString().trim().toLowerCase();
+						
+					articleadd = MainActivity.basketManagement.addItem(article);
+					autoComplete.getText().clear();
 					//Log.d("MAIN",  articleadd+"");
 					if(!articleadd)
 					{
@@ -102,11 +104,13 @@ public class MainFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				String article = autoComplete.getText().toString().trim().toLowerCase();
+				autoComplete.getText().clear();
 				Intent i;
 				i = new Intent(getActivity(), MapsActivity.class);
 				i.putExtra("PARENTNAME","Home");
 				i.putExtra("BASKET", true);
-				i.putExtra("ARTICLE", autoComplete.getText().toString().toLowerCase());
+				i.putExtra("ARTICLE",article );
 				startActivityForResult(i, 1);
 
 			}

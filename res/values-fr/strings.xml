@@ -42,5 +42,5 @@
        <string name="fragment_main_hint">Entrez un article à rechercher</string>
   <string name="fragment_main_toast">Cet article n\'existe pas</string>
   <string name="title_activity_credits">Credits</string>
-  
+    <string name="maps_toast_proximity">Aucun magasin à proximité, tous les magasins sont affichés </string>
 </resources>

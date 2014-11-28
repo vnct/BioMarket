@@ -42,5 +42,6 @@
         <string name="fragment_main_hint">Enter a product to find</string>
 	 <string name="title_activity_credits">Credits</string>
     <string name="fragment_main_toast">This article doesn\'t exist</string>
+     <string name="maps_toast_proximity">No store in proximity, all stores are displayed</string>
 
 </resources>

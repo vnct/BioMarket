@@ -67,7 +67,6 @@ public class StoreBaseAdapter extends BaseAdapter{
 		TextView textViewPosition = (TextView) vue.findViewById(R.id.textViewStorePosition);
 		textViewName.setText(myStoreList.get(position).getNom());
 		textViewCompatibility.setText(""); 
-
 		textViewPosition.setText(""); 
 		return vue;
 	}
